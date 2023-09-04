@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   SafeAreaView,
-  Text,
 } from 'react-native';
+import AllMenu from './src/pages/AllMenu';
 
 const App = () => {
   return (
     <SafeAreaView>
-      <Text>Hello World</Text>
+      <AllMenu />
     </SafeAreaView>
   );
 };
