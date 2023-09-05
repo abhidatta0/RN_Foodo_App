@@ -13,9 +13,11 @@ const availableToppings:Topping[] = [
   ]
 
   
-type MenuType = Record<string, FoodSelection[]>
+type MenuType = Record<string,{ items: FoodSelection[], iconName:string}>
 const data:MenuType = {
-    pizza:[
+    pizza:{
+        iconName:'pizza',
+        items: [
         {
             name:'Margherita Pizza',
             image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
@@ -127,7 +129,10 @@ const data:MenuType = {
         },
 
     ],
-    burger:[
+    },
+    burger:{
+        iconName:'hamburger',
+        items: [
         {
             name:'Jumbo Royal Chicken Burger',
             image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2799&q=80',
@@ -161,6 +166,7 @@ const data:MenuType = {
             id:129,
         },
     ]
+    }
 }
 
 export default data;
