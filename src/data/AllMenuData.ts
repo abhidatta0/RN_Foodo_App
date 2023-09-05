@@ -1,8 +1,21 @@
-import { FoodSelection, Size } from "../types/FoodSelection";
+import { FoodSelection, Size, Topping } from "../types/FoodSelection";
 
+const availableToppings:Topping[] = [
+    {
+      name:'Beef',
+    },
+    {
+      name:'Onion',
+    },
+    {
+      name:'Mushroom',
+    }
+  ]
+
+  
 type MenuType = Record<string, FoodSelection[]>
 const data:MenuType = {
-    pizzas:[
+    pizza:[
         {
             name:'Margherita Pizza',
             image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
@@ -26,6 +39,10 @@ const data:MenuType = {
                     portion: 8
                 }
             ],
+            toppings: [
+                availableToppings[0],
+                availableToppings[1],
+            ],
             id:123,
         },
         {
@@ -44,6 +61,10 @@ const data:MenuType = {
                     diameterInInches:12,
                     portion: 6
                 },
+            ],
+            toppings: [
+                availableToppings[0],
+                availableToppings[1],
             ],
             id:124,
         },
@@ -144,15 +165,4 @@ const data:MenuType = {
 
 export default data;
 
-const toppings = [
-  {
-    name:'Beef',
-  },
-  {
-    name:'Onion',
-  },
-  {
-    name:'Mushroom',
-  }
-]
 

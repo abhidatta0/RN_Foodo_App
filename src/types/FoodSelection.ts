@@ -6,6 +6,7 @@ export type FoodSelection =  {
 
 type PizzaTypes = {
     pizzaTypes: PizzaType[],
+    toppings?: Topping[];
 }
 
 type Variations = {
@@ -27,4 +28,8 @@ export enum Size {
 type VariationType =  {
     name:string,
     price: number,   
+}
+
+export type Topping = {
+    name:string,
 }
