@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {useMemo} from 'react';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../theme/colors';
 import Spacing from '../theme/spacing';
 import { FoodSelection } from '../types/FoodSelection';
@@ -40,7 +41,10 @@ const FoodCard = ({food}: Props)=>{
         <View style={styles.content}>
         <Text>{food.name}</Text>
         {topping ? <Text>with {topping}</Text> : null}
-        <Text><Text style={styles.amount}>$</Text> <Text>{getLowestPrice()}</Text></Text>
+        <View style={styles.amountWrapper}>
+            <Text><Text style={styles.amount}>$</Text> <Text>{getLowestPrice()}</Text></Text>
+            <MaterialCommunityIcon name="cards-heart" size={24} color={Colors.grey['700']}/>
+        </View>
         </View>
     </View>
   )
@@ -55,7 +59,8 @@ const styles = StyleSheet.create({
         marginVertical: Spacing.large,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: Colors.grey['200']
+        borderColor: Colors.grey['200'],
+        height: 150
     },
     content:{
      marginTop: 60
@@ -77,5 +82,9 @@ const styles = StyleSheet.create({
     },
     amount:{
         color: Colors.gold['400']
+    },
+    amountWrapper:{
+       flexDirection:'row',
+       justifyContent:'space-between'
     }
 })
