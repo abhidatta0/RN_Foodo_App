@@ -8,13 +8,10 @@ import Spacing from '../theme/spacing';
 type Props = {
     type: string;
     iconName: string;
+    isSelected: boolean;
+    onPress: ()=> void;
 }
-const FoodTypeSelectButton = ({type, iconName}: Props)=>{
-    const [isSelected, setIsSelected] = useState(false);
-
-    const onPress = ()=>{
-        setIsSelected(!isSelected);
-    }
+const FoodTypeSelectButton = ({type, iconName, isSelected, onPress}: Props)=>{
 
     const selectedStateStyle: StyleProp<ViewStyle> = {
       backgroundColor: Colors.gold['400'],
