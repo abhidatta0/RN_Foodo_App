@@ -4,6 +4,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import Colors from '../theme/colors';
 import Spacing from '../theme/spacing';
 import { FoodSelection } from '../types/FoodSelection';
+import { FontFamilies, FontSize } from '../theme/fonts';
 
 type Props = {
     food: FoodSelection;
@@ -39,10 +40,13 @@ const FoodCard = ({food}: Props)=>{
            <Image source={{uri: food.image}} style={styles.img}/>
         </View>
         <View style={styles.content}>
-        <Text>{food.name}</Text>
-        {topping ? <Text>with {topping}</Text> : null}
-        <View style={styles.amountWrapper}>
-            <Text><Text style={styles.amount}>$</Text> <Text>{getLowestPrice()}</Text></Text>
+        <Text style={styles.foodName}>{food.name}</Text>
+        {topping ? <Text style={styles.topping}>with {topping}</Text> : null}
+        <View style={styles.amountAndFavWrapper}>
+            <View style={styles.amountWrapper}>
+                <Text style={styles.currency}>$</Text> 
+                <Text style={styles.amount}>{getLowestPrice()}</Text>
+            </View>
             <MaterialCommunityIcon name="cards-heart" size={24} color={Colors.grey['700']}/>
         </View>
         </View>
@@ -81,10 +85,28 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     amount:{
-        color: Colors.gold['400']
+        fontFamily: FontFamilies.Lato.Bold,
+        fontSize: FontSize[20],
+        color: Colors.grey['700']
     },
-    amountWrapper:{
+    currency:{
+        color: Colors.gold['400'],
+        
+    },
+    amountWrapper:{flexDirection:'row', gap: Spacing.xs, alignItems:'center'},
+    amountAndFavWrapper:{
        flexDirection:'row',
        justifyContent:'space-between'
-    }
+    },
+    foodName:{
+        fontFamily: FontFamilies.Lato.Bold,
+        fontSize: FontSize[14],
+        color:Colors.grey['700'],
+    },
+    topping:{
+        fontFamily: FontFamilies.Lato.Regular,
+        fontSize: FontSize[14],
+        color: Colors.grey[600],
+        marginVertical:Spacing.xs,
+    },
 })

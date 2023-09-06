@@ -65,15 +65,15 @@ const styles = StyleSheet.create({
         marginBottom: Spacing.medium,
     },
     flatListContainer:{
-        rowGap: 20,
+        rowGap: Spacing.medium,
         marginTop: Spacing.large
     },
     columnWrapper:{
         justifyContent:'space-between',
-        rowGap: 20
+        rowGap: Spacing.medium
     },
     itemWrapper:{
-        width: '49%'
+        width: '47%'
     },
     foodTypeWrapper:{
         marginRight: 10,
