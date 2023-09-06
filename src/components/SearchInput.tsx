@@ -1,5 +1,7 @@
-import {Text, View, TextInput, StyleSheet, TextInputProps} from 'react-native';
-import {useState} from 'react';
+import { View, TextInput, StyleSheet, TextInputProps} from 'react-native';
+import  Ionicons from 'react-native-vector-icons/Ionicons';
+import Spacing from '../theme/spacing';
+import Colors from '../theme/colors';
 
 type Props = {
      updateSearchText: (value:string)=> void
@@ -8,8 +10,9 @@ type Props = {
 const SearchInput = (props: Props)=>{
    
    return (
-    <View>
+    <View style={styles.container}>
        <TextInput {...props} style={styles.textInput} value={props.value} onChangeText={(value)=> props.updateSearchText(value)}/>
+       <Ionicons name="search-outline" size={25}/>
     </View>
    )
 }
@@ -17,7 +20,16 @@ const SearchInput = (props: Props)=>{
 export default SearchInput;
 
 const styles = StyleSheet.create({
+    container:{
+     flexDirection:'row',
+     alignItems:'center',
+     borderWidth: 2,
+     borderRadius: 30,
+     paddingHorizontal: Spacing.medium,
+     borderColor: Colors.grey['200'],
+     marginVertical: Spacing.large,
+    },
     textInput:{
-        borderWidth: 1,
+        flex: 1
     }
 })
