@@ -1,5 +1,4 @@
 import {Pressable, Text, StyleSheet, StyleProp, ViewStyle, } from 'react-native';
-import {useState} from 'react';
 import  MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../theme/colors';
 import Spacing from '../theme/spacing';
@@ -40,6 +39,6 @@ const styles= StyleSheet.create({
     },
     text:{
       color: Colors.grey['700'],
-      textTransform:'capitalize'
+      textTransform:'capitalize',
     }
 })

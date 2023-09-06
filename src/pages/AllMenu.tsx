@@ -1,10 +1,12 @@
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet, Text} from 'react-native';
 import {useState} from 'react';
 import AllMenuData from '../data/AllMenuData';
 import FoodCard from '../components/FoodCard';
 import Spacing from '../theme/spacing';
 import FoodTypeSelectButton from '../components/FoodTypeSelectButton';
 import SearchInput from '../components/SearchInput';
+import {FontFamilies, FontSize} from '../theme/fonts';
+import Colors from '../theme/colors';
 
 const AllMenu = ()=>{
     const availableFoodTypes = Object.keys(AllMenuData);
@@ -16,7 +18,11 @@ const AllMenu = ()=>{
 
    return (
     <View style={styles.container}>
-        <SearchInput value={searchText} updateSearchText={setSearchText}/>
+        <Text style={styles.headerLine1}>Fast Food, </Text>
+        <Text style={styles.headerLine2}>Fast Delivery </Text>
+        <SearchInput value={searchText} updateSearchText={setSearchText} 
+        placeholder={`Search your ${selectedType} here`}
+        />
         <FlatList
         horizontal
         data={availableFoodTypes}
@@ -45,6 +51,18 @@ export default AllMenu;
 const styles = StyleSheet.create({
     container:{
         padding:Spacing.small,
+    },
+    headerLine1:{
+     fontFamily: FontFamilies.Lato.Light,
+     fontSize: FontSize[30],
+     color: Colors.grey['700'],
+     marginTop: Spacing.large,
+    },
+    headerLine2:{
+        fontFamily: FontFamilies.Lato.Bold,
+        fontSize: FontSize[30],
+        color: Colors.grey['700'],
+        marginBottom: Spacing.medium,
     },
     flatListContainer:{
         rowGap: 20,
