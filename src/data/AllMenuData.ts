@@ -21,6 +21,9 @@ const data:MenuType = {
         {
             name:'Margherita Pizza',
             subName:"with Tomato",
+            ratingOutOf5: 4.7,
+            calories: 275,
+            description:'Margherita pizza is known for its ingredients representing the colours of the Italian flag. These ingredients include red tomato sauce, white mozzarella and fresh green basil. When all of these delicious flavours are combined on a hand-kneaded pizza base, a universally-adored pizza is created.',
             image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
             pizzaTypes:[
                 {
@@ -50,6 +53,9 @@ const data:MenuType = {
         },
         {
             name:'Mushroom Pizza',
+            ratingOutOf5: 3,
+            calories: 275,
+            description:'This delicious mushroom pizza is smothered in sautéed mushrooms, onions and garlic, slivers of lacinato kale and layers of mozzarella and fresh-grated parmesan. The dough has same day as well as overnight options. You will love it!',
             image: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
             pizzaTypes:[
                 {
@@ -74,6 +80,9 @@ const data:MenuType = {
         {
             name:'Mushroom(Salami) Pizza',
             subName:"with Tomato",
+            ratingOutOf5: 4.3,
+            calories: 290,
+            description:'This delicious mushroom pizza is smothered in sautéed mushrooms, onions and garlic, slivers of lacinato kale and layers of mozzarella and fresh-grated parmesan. The dough has same day as well as overnight options. You will love it!',
             image: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
             pizzaTypes:[
                 {
@@ -99,6 +108,9 @@ const data:MenuType = {
         },
         {
             name:'Margherita Pizza',
+            ratingOutOf5: 3.5,
+            calories: 275,
+            description:'Margherita pizza is known for its ingredients representing the colours of the Italian flag. These ingredients include red tomato sauce, white mozzarella and fresh green basil. When all of these delicious flavours are combined on a hand-kneaded pizza base, a universally-adored pizza is created.',
             image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
             pizzaTypes:[
                 {
@@ -118,6 +130,9 @@ const data:MenuType = {
         },
         {
             name:'Mushroom Pizza',
+            ratingOutOf5: 4,
+            calories: 230,
+            description:'This delicious mushroom pizza is smothered in sautéed mushrooms, onions and garlic, slivers of lacinato kale and layers of mozzarella and fresh-grated parmesan. The dough has same day as well as overnight options. You will love it!',
             image: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80',
             pizzaTypes:[
                 {
@@ -137,6 +152,9 @@ const data:MenuType = {
         items: [
         {
             name:'Jumbo Royal Chicken Burger',
+            ratingOutOf5: 3.7,
+            calories: 300,
+            description:'Specially crafted combination of the juiciest chicken and choicest spices to create the perfect crunchy chicken burger patty.',
             image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2799&q=80',
             variations:[
                 {
@@ -157,6 +175,9 @@ const data:MenuType = {
         },
         {
             name:'Aloo Tikki Burger',
+            ratingOutOf5: 3.2,
+            calories: 250,
+            description:'Going plant-based for your chicken cravings is a huge change. To let you enjoy your favorite chicken-like meal on any day of the week - even on the vegetarian days, We bring to you plant-powered range of chicken recipes. Discover the nutritional goodness and fabulous chicken-like taste of our plant-based products that have unbeatable texture, flavour, crunch and juiciness just like the real chicken. It’s all real, and it comes from plants.',
             image: 'https://images.unsplash.com/photo-1603064752734-4c48eff53d05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2788&q=80',
             variations:[
                 {

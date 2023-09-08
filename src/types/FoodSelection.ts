@@ -3,6 +3,9 @@ export type FoodSelection =  {
     image: string,
     subName?: string,
     id:number,
+    ratingOutOf5: number;
+    calories: number;
+    description: string;
 } & (PizzaTypes | Variations);
 
 type PizzaTypes = {

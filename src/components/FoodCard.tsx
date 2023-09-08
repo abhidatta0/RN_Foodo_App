@@ -33,7 +33,7 @@ const FoodCard = ({food}: Props)=>{
         </View>
         <View style={styles.content}>
         <Text style={styles.foodName}>{food.name}</Text>
-        {food.subName ? <Text style={styles.topping}>{food.subName}</Text> : null}
+        {food.subName ? <Text style={styles.subName}>{food.subName}</Text> : null}
         <View style={styles.amountAndFavWrapper}>
             <View style={styles.amountWrapper}>
                 <Text style={styles.currency}>$</Text> 
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         fontSize: FontSize[14],
         color:Colors.grey['700'],
     },
-    topping:{
+    subName:{
         fontFamily: FontFamilies.Lato.Regular,
         fontSize: FontSize[14],
         color: Colors.grey[600],
