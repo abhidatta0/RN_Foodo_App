@@ -4,32 +4,12 @@ import Spacing from '../theme/spacing';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import Colors from '../theme/colors';
 import ReviewRating from '../components/ReviewRating';
+import useFood from '../hooks/useFood';
 
 const FoodDetail = ()=>{
     const selectedFood  = AllMenuData["pizza"].items[0];
-    const isPizzaType = 'pizzaTypes' in selectedFood ;
-    const findLowest = (arr: Array<number>)=>{
-        return arr.reduce((acc, curr)=> {
-            if(curr < acc){
-                acc = curr;
-            }
-            return acc;
-          }, Number.MAX_SAFE_INTEGER);
-    }
-    const getLowestPrice = ()=>{
-      if(isPizzaType){
-        return findLowest(selectedFood.pizzaTypes.map(pz => pz.price));
-      }
-      return findLowest(selectedFood.variations.map((v)=> v.price));
-    }
 
-    const getDiameterAndPortion = ()=>{
-        if(isPizzaType) return( {
-         diameter:selectedFood.pizzaTypes[0].diameterInInches,
-         portion:selectedFood.pizzaTypes[0].portion,
-        })
-        return null;
-    }
+    const { getLowestPrice , getDiameterAndPortion} = useFood(selectedFood);
 
     const diameterAndPortion = getDiameterAndPortion();
   return (

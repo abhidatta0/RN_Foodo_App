@@ -5,26 +5,15 @@ import Colors from '../theme/colors';
 import Spacing from '../theme/spacing';
 import { FoodSelection } from '../types/FoodSelection';
 import { FontFamilies, FontSize } from '../theme/fonts';
+import useFood from '../hooks/useFood';
 
 type Props = {
     food: FoodSelection;
 }
 const FoodCard = ({food}: Props)=>{
-    const isPizzaType = 'pizzaTypes' in food ;
-    const findLowest = (arr: Array<number>)=>{
-        return arr.reduce((acc, curr)=> {
-            if(curr < acc){
-                acc = curr;
-            }
-            return acc;
-          }, Number.MAX_SAFE_INTEGER);
-    }
-    const getLowestPrice = ()=>{
-      if(isPizzaType){
-        return findLowest(food.pizzaTypes.map(pz => pz.price));
-      }
-      return findLowest(food.variations.map((v)=> v.price));
-    }
+   
+
+    const { getLowestPrice} = useFood(food);
 
   return (
     <View style={styles.container}>

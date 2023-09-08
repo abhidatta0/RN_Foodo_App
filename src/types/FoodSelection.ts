@@ -6,15 +6,17 @@ export type FoodSelection =  {
     ratingOutOf5: number;
     calories: number;
     description: string;
-} & (PizzaTypes | Variations);
+} & (PizzaTypes | Burger);
 
 type PizzaTypes = {
     pizzaTypes: PizzaType[],
     toppings?: Topping[];
+    category_type :'PIZZA',
 }
 
-type Variations = {
-    variations: VariationType[]
+type Burger = {
+    variations: VariationType[],
+    category_type:'BURGER'  
 }
 type PizzaType = { 
     type:Size,
