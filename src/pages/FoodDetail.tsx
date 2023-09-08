@@ -1,6 +1,8 @@
 import {View, Text, StyleSheet,Image} from 'react-native';
 import AllMenuData from '../data/AllMenuData';
 import Spacing from '../theme/spacing';
+import { FontFamilies, FontSize } from '../theme/fonts';
+import Colors from '../theme/colors';
 
 const FoodDetail = ()=>{
     const selectedFood  = AllMenuData["pizza"].items[0];
@@ -30,9 +32,9 @@ const FoodDetail = ()=>{
 
     const diameterAndPortion = getDiameterAndPortion();
   return (
-   <View>
-    <Text>{selectedFood.name}</Text>
-    <Text>{selectedFood.subName}</Text>
+   <View style={styles.container}>
+    <Text style={styles.foodName}>{selectedFood.name}</Text>
+    <Text style={styles.subName}>{selectedFood.subName}</Text>
     <Text>Star ({selectedFood.ratingOutOf5})</Text>
     <View style={styles.imgContainer}>
            <Image source={{uri: selectedFood.image}} style={styles.img}/>
@@ -41,13 +43,13 @@ const FoodDetail = ()=>{
                 <Text style={styles.currency}>$</Text> 
                 <Text style={styles.amount}>{getLowestPrice()}</Text>
     </View>
-    <View>
-        <Text>Calories</Text>
-        <Text>{selectedFood.calories}</Text>
+    <View style={styles.caloriesInfo}>
+        <Text style={styles.caloriesHeading}>Calories</Text>
+        <Text style={styles.calories}>{selectedFood.calories} Cal</Text>
     </View>
-    {diameterAndPortion ? <View>
-        <Text>Diameter / Portion</Text>
-        <Text>{diameterAndPortion.diameter} / {diameterAndPortion.portion}</Text>
+    {diameterAndPortion ? <View style={styles.portionInfo}>
+        <Text style={styles.portionHeading}>Diameter / Portion</Text>
+        <Text style={styles.portion}>{diameterAndPortion.diameter}` / {diameterAndPortion.portion} Slices</Text>
     </View>: null}
    </View>
   )
@@ -56,28 +58,68 @@ const FoodDetail = ()=>{
 export default FoodDetail;
 
 const styles = StyleSheet.create({
-    amountWrapper:{
-
-    },
-    currency:{
-
+    container:{
+       padding: Spacing.medium,
+       borderWidth: 1,
     },
     amount:{
-
+        fontFamily: FontFamilies.Lato.Bold,
+        fontSize: FontSize[30],
+        color: Colors.grey['700'],
+    },
+    currency:{
+        color: Colors.gold['400'],
+        fontFamily: FontFamilies.Lato.Bold,
+    },
+    amountWrapper:{flexDirection:'row', gap: Spacing.xs, alignItems:'flex-end', marginVertical: Spacing.medium,},
+    foodName:{
+        fontFamily: FontFamilies.Lato.Bold,
+        fontSize: FontSize[30],
+        color:Colors.grey['700'],
+    },
+    subName:{
+        fontFamily: FontFamilies.Lato.Regular,
+        fontSize: FontSize['16'],
+        color: Colors.grey[600],
+        marginVertical:Spacing.xs,
     },
     img:{
         width: '100%',
-        height: 90,
-        resizeMode:'contain'
+        height: '100%',
+        resizeMode:'cover'
     },
     imgContainer:{
         position:'absolute',
-        top: -30,
-        left: 10,
-        width:'100%',
-        marginBottom: Spacing.small,
-        alignItems:'center',
-        justifyContent:'flex-start',
-        borderRadius: 10,
+        top: '40%',
+        right: -10,
+        width:'60%',
+        height:'50%',
     },
+
+    caloriesInfo:{
+        marginVertical: Spacing.small
+    },
+    caloriesHeading:{
+        fontFamily: FontFamilies.Lato.Regular,
+        fontSize: FontSize['16'],
+        color: Colors.grey[600],
+    },
+    calories:{
+        fontFamily: FontFamilies.Lato.Bold,
+        color: Colors.grey[700],
+        fontSize: FontSize['18']
+    },
+    portionInfo:{
+        marginVertical: Spacing.small
+    },
+    portionHeading:{
+        fontFamily: FontFamilies.Lato.Regular,
+        fontSize: FontSize['16'],
+        color: Colors.grey[600],
+    },
+    portion:{
+        fontFamily: FontFamilies.Lato.Bold,
+        color: Colors.grey[700],
+        fontSize: FontSize['18']
+    }
 })

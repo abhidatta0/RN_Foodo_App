@@ -8,8 +8,8 @@ import FoodDetail from './src/pages/FoodDetail';
 const App = () => {
   return (
     <SafeAreaView>
-      <AllMenu />
-      {/* <FoodDetail /> */}
+      {/* <AllMenu /> */}
+      <FoodDetail />
     </SafeAreaView>
   );
 };
