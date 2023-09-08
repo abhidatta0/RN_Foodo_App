@@ -3,6 +3,7 @@ import AllMenuData from '../data/AllMenuData';
 import Spacing from '../theme/spacing';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import Colors from '../theme/colors';
+import ReviewRating from '../components/ReviewRating';
 
 const FoodDetail = ()=>{
     const selectedFood  = AllMenuData["pizza"].items[0];
@@ -35,7 +36,10 @@ const FoodDetail = ()=>{
    <View style={styles.container}>
     <Text style={styles.foodName}>{selectedFood.name}</Text>
     <Text style={styles.subName}>{selectedFood.subName}</Text>
-    <Text>Star ({selectedFood.ratingOutOf5})</Text>
+    <View style={styles.reviewWrapper}>
+    <ReviewRating rating={selectedFood.ratingOutOf5}/>
+    <Text style={styles.ratingText}>({selectedFood.ratingOutOf5})</Text>
+    </View>
     <View style={styles.imgContainer}>
            <Image source={{uri: selectedFood.image}} style={styles.img}/>
         </View>
@@ -60,7 +64,6 @@ export default FoodDetail;
 const styles = StyleSheet.create({
     container:{
        padding: Spacing.medium,
-       borderWidth: 1,
     },
     amount:{
         fontFamily: FontFamilies.Lato.Bold,
@@ -95,7 +98,14 @@ const styles = StyleSheet.create({
         width:'60%',
         height:'50%',
     },
-
+    reviewWrapper:{
+       flexDirection:'row'
+    },
+    ratingText:{
+        fontFamily: FontFamilies.Lato.Bold,
+        fontSize: FontSize[14],
+        color:Colors.grey['700'],
+    },
     caloriesInfo:{
         marginVertical: Spacing.small
     },
