@@ -26,14 +26,6 @@ const FoodCard = ({food}: Props)=>{
       return findLowest(food.variations.map((v)=> v.price));
     }
 
-    const topping = useMemo(()=>{
-        if(isPizzaType){
-            return  food.toppings?.[0].name;
-        }
-        return null;
-    },[])
-
-
   return (
     <View style={styles.container}>
         <View style={styles.imgContainer}>
@@ -41,7 +33,7 @@ const FoodCard = ({food}: Props)=>{
         </View>
         <View style={styles.content}>
         <Text style={styles.foodName}>{food.name}</Text>
-        {topping ? <Text style={styles.topping}>with {topping}</Text> : null}
+        {food.subName ? <Text style={styles.topping}>{food.subName}</Text> : null}
         <View style={styles.amountAndFavWrapper}>
             <View style={styles.amountWrapper}>
                 <Text style={styles.currency}>$</Text> 
@@ -64,7 +56,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: Colors.grey['200'],
-        height: 150
+        height: 170
     },
     content:{
      marginTop: 60
