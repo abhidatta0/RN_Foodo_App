@@ -10,7 +10,7 @@ import Badge from '../components/Badge';
 import AddToCartWrapperButton from '../components/AddToCartWrapperButton';
 
 const FoodDetail = ()=>{
-    const selectedFood  = AllMenuData["pizza"].items[0];
+    const selectedFood  = AllMenuData["burger"].items[0];
 
     const { getDiameterAndPortion, getAvailableSizes, getVariationsNames, getToppings} = useFood(selectedFood);
 
@@ -91,8 +91,9 @@ const FoodDetail = ()=>{
     <View style={styles.descriptionBox}>
         <Text style={styles.descriptionText}>{selectedFood.description} {selectedFood.description}</Text>
     </View>
+    <View style={styles.emptySpace} />
    </ScrollView>
-    <AddToCartWrapperButton />
+    <AddToCartWrapperButton onAddToCart={(count)=> console.log({count})}/>
     </View>
   )
 }
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     },
     imgContainer:{
         position:'absolute',
-        top: '40%',
+        top: '30%',
         right: -20,
         width:'60%',
         height:'60%',
@@ -195,5 +196,8 @@ const styles = StyleSheet.create({
       fontFamily: FontFamilies.Lato.Regular,
       color: Colors.grey['600'],
       fontSize: FontSize[18],
+    },
+    emptySpace:{
+        height: 110,
     }
 })

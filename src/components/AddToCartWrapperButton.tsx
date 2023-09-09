@@ -6,11 +6,11 @@ import Spacing from '../theme/spacing';
 import Colors from '../theme/colors';
 import { FontFamilies, FontSize } from '../theme/fonts';
 
-const AddToCartWrapperButton = ()=>{
+type Props = {
+    onAddToCart: (count: number)=> void;
+}
+const AddToCartWrapperButton = ({onAddToCart}:Props)=>{
     const [currentCount, setCurrentCount] = useState(1);
-    const onAddToCart = ()=>{
-        console.log({currentCount});
-    }
 
     return (
         <View style={styles.container}>
@@ -21,7 +21,7 @@ const AddToCartWrapperButton = ()=>{
               <Text style={styles.count}>{currentCount}</Text>
               <FeatherIcons name="plus" size={26} color={Colors.grey['700']} onPress={()=> setCurrentCount(currentCount+1)}/>
             </View>
-            <TouchableOpacity style={styles.addToCartBtn} onPress={onAddToCart}>
+            <TouchableOpacity style={styles.addToCartBtn} onPress={()=> onAddToCart(currentCount)}>
               <FontistoIcons name="shopping-bag" size={26} color={Colors.gold['400']}/>
               <Text style={styles.addToCartText}>Add to cart</Text>
             </TouchableOpacity>
