@@ -19,7 +19,7 @@ type Burger = {
     category_type:'BURGER'  
 }
 type PizzaType = { 
-    type:Size,
+    size:Size,
     price: number,
     diameterInInches:number,
     portion: number;

@@ -19,10 +19,16 @@ const useFood = (food: FoodSelection)=>{
         })
         return null;
     }
+
+    const getAvailableSizes = (): string[]|null=>{
+      if(isPizzaType) return food.pizzaTypes.map((pz)=> pz.size)
+      return null;
+  }
   return {
     isPizzaType,
     getLowestPrice,
     getDiameterAndPortion,
+    getAvailableSizes,
   }
 }
 

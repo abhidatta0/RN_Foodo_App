@@ -1,17 +1,23 @@
-import {View, Text, StyleSheet,Image} from 'react-native';
+import {View, Text, StyleSheet,Image, FlatList} from 'react-native';
+import {useState} from 'react';
 import AllMenuData from '../data/AllMenuData';
 import Spacing from '../theme/spacing';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import Colors from '../theme/colors';
 import ReviewRating from '../components/ReviewRating';
 import useFood from '../hooks/useFood';
+import Badge from '../components/Badge';
 
 const FoodDetail = ()=>{
     const selectedFood  = AllMenuData["pizza"].items[0];
 
-    const { getLowestPrice , getDiameterAndPortion} = useFood(selectedFood);
+    const { getLowestPrice , getDiameterAndPortion, getAvailableSizes} = useFood(selectedFood);
 
     const diameterAndPortion = getDiameterAndPortion();
+
+    const availableSizes = getAvailableSizes();
+
+    const [currentSize, setCurrentSize] = useState(availableSizes ? availableSizes[0]: null);
   return (
    <View style={styles.container}>
     <Text style={styles.foodName}>{selectedFood.name}</Text>
@@ -35,6 +41,17 @@ const FoodDetail = ()=>{
         <Text style={styles.portionHeading}>Diameter / Portion</Text>
         <Text style={styles.portion}>{diameterAndPortion.diameter}` / {diameterAndPortion.portion} Slices</Text>
     </View>: null}
+    {availableSizes ? <View style={styles.sizeSelection}>
+        <Text style={styles.sizeHeading}>Size</Text>
+        <FlatList
+         horizontal
+         data={availableSizes}
+         renderItem={({item})=> <Badge text={item} onPress={()=> setCurrentSize(item)} 
+         isSelected={currentSize === item}
+         />}
+         contentContainerStyle={styles.sizeBadgeContainerStyle}
+        />
+    </View>:null}
    </View>
   )
 }
@@ -111,5 +128,17 @@ const styles = StyleSheet.create({
         fontFamily: FontFamilies.Lato.Bold,
         color: Colors.grey[700],
         fontSize: FontSize['18']
+    },
+    sizeSelection:{
+        marginVertical: Spacing.small
+    },
+    sizeHeading:{
+        fontFamily: FontFamilies.Lato.Regular,
+        fontSize: FontSize['16'],
+        color: Colors.grey[600],
+    },
+    sizeBadgeContainerStyle:{
+      columnGap: 10,
+      marginVertical: Spacing.small
     }
 })
