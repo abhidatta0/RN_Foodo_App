@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet,Image, FlatList} from 'react-native';
+import {View, Text, StyleSheet,Image, FlatList, ScrollView} from 'react-native';
 import {useState} from 'react';
 import AllMenuData from '../data/AllMenuData';
 import Spacing from '../theme/spacing';
@@ -29,7 +29,7 @@ const FoodDetail = ()=>{
         return selectedFood.variations.find((v)=> v.name === currentVariation)?.price;
     }
   return (
-   <View style={styles.container}>
+   <ScrollView style={styles.container}>
     <View style={styles.upperContent}>
         <Text style={styles.foodName}>{selectedFood.name}</Text>
         <Text style={styles.subName}>{selectedFood.subName}</Text>
@@ -87,9 +87,9 @@ const FoodDetail = ()=>{
         />
     </View>:null}
     <View style={styles.descriptionBox}>
-        <Text style={styles.descriptionText}>{selectedFood.description}</Text>
+        <Text style={styles.descriptionText}>{selectedFood.description} {selectedFood.description}</Text>
     </View>
-   </View>
+   </ScrollView>
   )
 }
 
@@ -98,6 +98,7 @@ export default FoodDetail;
 const styles = StyleSheet.create({
     container:{
        padding: Spacing.medium,
+       paddingRight: 0,
     },
     upperContent:{
       marginVertical: Spacing.medium,
