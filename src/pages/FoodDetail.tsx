@@ -20,27 +20,29 @@ const FoodDetail = ()=>{
     const [currentSize, setCurrentSize] = useState(availableSizes ? availableSizes[0]: null);
   return (
    <View style={styles.container}>
-    <Text style={styles.foodName}>{selectedFood.name}</Text>
-    <Text style={styles.subName}>{selectedFood.subName}</Text>
-    <View style={styles.reviewWrapper}>
-    <ReviewRating rating={selectedFood.ratingOutOf5}/>
-    <Text style={styles.ratingText}>({selectedFood.ratingOutOf5})</Text>
-    </View>
-    <View style={styles.imgContainer}>
-           <Image source={{uri: selectedFood.image}} style={styles.img}/>
+    <View style={styles.upperContent}>
+        <Text style={styles.foodName}>{selectedFood.name}</Text>
+        <Text style={styles.subName}>{selectedFood.subName}</Text>
+        <View style={styles.reviewWrapper}>
+        <ReviewRating rating={selectedFood.ratingOutOf5}/>
+        <Text style={styles.ratingText}>({selectedFood.ratingOutOf5})</Text>
         </View>
-    <View style={styles.amountWrapper}>
-                <Text style={styles.currency}>$</Text> 
-                <Text style={styles.amount}>{getLowestPrice()}</Text>
-    </View>
-    <View style={styles.caloriesInfo}>
-        <Text style={styles.caloriesHeading}>Calories</Text>
-        <Text style={styles.calories}>{selectedFood.calories} Cal</Text>
-    </View>
-    {diameterAndPortion ? <View style={styles.portionInfo}>
-        <Text style={styles.portionHeading}>Diameter / Portion</Text>
-        <Text style={styles.portion}>{diameterAndPortion.diameter}` / {diameterAndPortion.portion} Slices</Text>
-    </View>: null}
+        <View style={styles.imgContainer}>
+            <Image source={{uri: selectedFood.image}} style={styles.img}/>
+            </View>
+        <View style={styles.amountWrapper}>
+                    <Text style={styles.currency}>$</Text> 
+                    <Text style={styles.amount}>{getLowestPrice()}</Text>
+        </View>
+        <View style={styles.caloriesInfo}>
+            <Text style={styles.caloriesHeading}>Calories</Text>
+            <Text style={styles.calories}>{selectedFood.calories} Cal</Text>
+        </View>
+        {diameterAndPortion ? <View style={styles.portionInfo}>
+            <Text style={styles.portionHeading}>Diameter / Portion</Text>
+            <Text style={styles.portion}>{diameterAndPortion.diameter}` / {diameterAndPortion.portion} Slices</Text>
+        </View>: null}
+        </View>
     {availableSizes ? <View style={styles.sizeSelection}>
         <Text style={styles.sizeHeading}>Size</Text>
         <FlatList
@@ -61,6 +63,9 @@ export default FoodDetail;
 const styles = StyleSheet.create({
     container:{
        padding: Spacing.medium,
+    },
+    upperContent:{
+      marginVertical: Spacing.medium,
     },
     amount:{
         fontFamily: FontFamilies.Lato.Bold,
@@ -91,9 +96,9 @@ const styles = StyleSheet.create({
     imgContainer:{
         position:'absolute',
         top: '40%',
-        right: -10,
+        right: -20,
         width:'60%',
-        height:'50%',
+        height:'60%',
     },
     reviewWrapper:{
        flexDirection:'row'
