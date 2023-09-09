@@ -7,6 +7,7 @@ import Colors from '../theme/colors';
 import ReviewRating from '../components/ReviewRating';
 import useFood from '../hooks/useFood';
 import Badge from '../components/Badge';
+import AddToCartWrapperButton from '../components/AddToCartWrapperButton';
 
 const FoodDetail = ()=>{
     const selectedFood  = AllMenuData["pizza"].items[0];
@@ -29,6 +30,7 @@ const FoodDetail = ()=>{
         return selectedFood.variations.find((v)=> v.name === currentVariation)?.price;
     }
   return (
+    <View>
    <ScrollView style={styles.container}>
     <View style={styles.upperContent}>
         <Text style={styles.foodName}>{selectedFood.name}</Text>
@@ -90,6 +92,8 @@ const FoodDetail = ()=>{
         <Text style={styles.descriptionText}>{selectedFood.description} {selectedFood.description}</Text>
     </View>
    </ScrollView>
+    <AddToCartWrapperButton />
+    </View>
   )
 }
 
