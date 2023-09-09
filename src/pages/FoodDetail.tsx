@@ -11,13 +11,23 @@ import Badge from '../components/Badge';
 const FoodDetail = ()=>{
     const selectedFood  = AllMenuData["pizza"].items[0];
 
-    const { getLowestPrice , getDiameterAndPortion, getAvailableSizes} = useFood(selectedFood);
+    const { getDiameterAndPortion, getAvailableSizes, getVariationsNames, getToppings} = useFood(selectedFood);
 
     const diameterAndPortion = getDiameterAndPortion();
+    const variationsNames = getVariationsNames();
+    const toppings = getToppings();
 
     const availableSizes = getAvailableSizes();
 
     const [currentSize, setCurrentSize] = useState(availableSizes ? availableSizes[0]: null);
+    const [currentVariation, setCurrentVariation] = useState(variationsNames ? variationsNames[0]: null);
+    const [currentTopping, setCurrentTopping] = useState(toppings ? toppings[0]: null);
+
+    console.log({currentTopping});
+    const getPrice = ()=>{
+        if(selectedFood.category_type === 'PIZZA') return selectedFood.pizzaTypes.find((pt)=> pt.size === currentSize)?.price;
+        return selectedFood.variations.find((v)=> v.name === currentVariation)?.price;
+    }
   return (
    <View style={styles.container}>
     <View style={styles.upperContent}>
@@ -32,7 +42,7 @@ const FoodDetail = ()=>{
             </View>
         <View style={styles.amountWrapper}>
                     <Text style={styles.currency}>$</Text> 
-                    <Text style={styles.amount}>{getLowestPrice()}</Text>
+                    <Text style={styles.amount}>{getPrice()}</Text>
         </View>
         <View style={styles.caloriesInfo}>
             <Text style={styles.caloriesHeading}>Calories</Text>
@@ -54,6 +64,31 @@ const FoodDetail = ()=>{
          contentContainerStyle={styles.sizeBadgeContainerStyle}
         />
     </View>:null}
+    {variationsNames ? <View style={styles.sizeSelection}>
+        <Text style={styles.sizeHeading}>Variations</Text>
+        <FlatList
+         horizontal
+         data={variationsNames}
+         renderItem={({item})=> <Badge text={item} onPress={()=> setCurrentVariation(item)} 
+         isSelected={currentVariation === item}
+         />}
+         contentContainerStyle={styles.sizeBadgeContainerStyle}
+        />
+    </View>:null}
+    {toppings ? <View style={styles.sizeSelection}>
+        <Text style={styles.sizeHeading}>Topping</Text>
+        <FlatList
+         horizontal
+         data={toppings}
+         renderItem={({item})=> <Badge text={item.name} onPress={()=> setCurrentTopping(item)} 
+         isSelected={currentTopping?.name === item.name}
+         />}
+         contentContainerStyle={styles.sizeBadgeContainerStyle}
+        />
+    </View>:null}
+    <View style={styles.descriptionBox}>
+        <Text style={styles.descriptionText}>{selectedFood.description}</Text>
+    </View>
    </View>
   )
 }
@@ -145,5 +180,15 @@ const styles = StyleSheet.create({
     sizeBadgeContainerStyle:{
       columnGap: 10,
       marginVertical: Spacing.small
+    },
+    descriptionBox:{
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderColor: Colors.grey['200'],
+        paddingVertical:Spacing.medium,
+    },
+    descriptionText:{
+      fontFamily: FontFamilies.Lato.Regular,
+      color: Colors.grey['600'],
+      fontSize: FontSize[18],
     }
 })

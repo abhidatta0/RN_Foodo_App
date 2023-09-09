@@ -49,6 +49,7 @@ const data:MenuType = {
             toppings: [
                 availableToppings[0],
                 availableToppings[1],
+                availableToppings[2],
             ],
             id:123,
         },

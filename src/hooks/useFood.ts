@@ -1,4 +1,4 @@
-import { FoodSelection } from "../types/FoodSelection";
+import { FoodSelection, Topping } from "../types/FoodSelection";
 import { findLowest } from "../utils/food";
 
 const useFood = (food: FoodSelection)=>{
@@ -24,11 +24,23 @@ const useFood = (food: FoodSelection)=>{
       if(isPizzaType) return food.pizzaTypes.map((pz)=> pz.size)
       return null;
   }
+
+  const getToppings = (): Topping[]|null=>{
+    if(isPizzaType) return food.toppings ?? null;
+    return null;
+  }
+
+  const getVariationsNames = (): string[]|null=>{
+    if(!isPizzaType) return food.variations.map((v)=> v.name);
+    return null;
+}
   return {
     isPizzaType,
     getLowestPrice,
     getDiameterAndPortion,
     getAvailableSizes,
+    getVariationsNames,
+    getToppings,
   }
 }
 
