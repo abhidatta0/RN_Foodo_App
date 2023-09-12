@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-  SafeAreaView,
-} from 'react-native';
-import AllMenu from './src/pages/AllMenu';
-import FoodDetail from './src/pages/FoodDetail';
+import Navigation from './src/navigation';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      {/* <AllMenu /> */}
-      <FoodDetail />
-    </SafeAreaView>
+    <Navigation />
   );
 };
 
