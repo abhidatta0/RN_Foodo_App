@@ -4,6 +4,7 @@ import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import FoodDetail from '../pages/FoodDetail';
 import AllMenu from '../pages/AllMenu';
@@ -31,7 +32,9 @@ const BottomTab = createBottomTabNavigator();
 
 const Navigation = ()=>{
    return (
+      <SafeAreaProvider>
     <NavigationContainer>
+      <SafeAreaView style={{flex: 1}}>
        <BottomTab.Navigator
        screenOptions={{headerShown: false, tabBarStyle:{
          height: 70,
@@ -54,7 +57,9 @@ const Navigation = ()=>{
             />)
          }
        </BottomTab.Navigator>
+       </SafeAreaView>
     </NavigationContainer>
+    </SafeAreaProvider>
    )
 }
 
