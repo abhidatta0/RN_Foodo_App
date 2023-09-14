@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,7 +12,7 @@ import Colors from '../theme/colors';
 
 const TabArr = [
     {route: 'All_Menu', label:"All Menu", type: Ionicons, activeIcon:'grid', inactiveIcon : 'grid-outline', component: AllMenu},
-    {route: 'Shop', label: 'Shop', type: MaterialCommunityIcons, activeIcon:'cart', inactiveIcon : 'cart-outline', component: FoodDetail}
+    {route: 'Shop', label: 'Shop', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: FoodDetail}
 ]
 
 type TabButtonProps = BottomTabBarButtonProps & {item: typeof TabArr[0]};
@@ -22,6 +22,7 @@ const TabButton = ({item, onPress, ...rest}:TabButtonProps)=>{
     return (
      <TouchableOpacity style={styles.bottomTabContainer} onPress={onPress} activeOpacity={1}>
        <Icon type={item.type} name={item.activeIcon} color={isFocused ? Colors.gold['400']: Colors.grey['400']}/>
+       <Text style={[ styles.iconLabel ,isFocused ? {color: Colors.grey['400']}: null]}>{item.label}</Text>
      </TouchableOpacity>
     )
 }
@@ -39,13 +40,13 @@ const Navigation = ()=>{
          right: 16,
          left: 16,
          borderRadius: 16,
-         // padding: 16,
+         backgroundColor: Colors.grey['700']
        }}}
        >
          {
             TabArr.map((item)=> <BottomTab.Screen key={item.label} name={item.route} component={item.component} 
             options={{tabBarLabel: item.label, 
-               // tabBarLabelStyle:{paddingBottom: 15},
+               tabBarLabelStyle: {paddingBottom: 6},      
                tabBarIcon: ({color, focused})=> 
             <Icon type={item.type} name={focused ? item.activeIcon : item.inactiveIcon} color={color} />,
             tabBarButton: (props)=> <TabButton {...props} item={item}/>
@@ -64,5 +65,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent:'center',
     alignItems:'center',
+   },
+   iconLabel:{
+      marginTop: 3,
+      fontSize: 10,
+      color: Colors.grey['500']
    }
 })
