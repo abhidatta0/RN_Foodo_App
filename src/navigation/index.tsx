@@ -1,7 +1,6 @@
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
-import {NavigationContainer, RouteConfigComponent} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,6 +13,7 @@ import Colors from '../theme/colors';
 import MyOrders from '../pages/MyOrders';
 import { BottomNavParamList } from '../types/Navigation';
 import React from 'react';
+import Spacing from '../theme/spacing';
 
 type TabType = {
    route: keyof BottomNavParamList,
@@ -65,12 +65,15 @@ const Navigation = ()=>{
        >
          {
             TabArr.map((item)=> <BottomTab.Screen key={item.label} name={item.route} component={item.component} 
-            options={{tabBarLabel: item.label, 
+            options={({route, navigation})=> ({tabBarLabel: item.label, 
                tabBarLabelStyle: {paddingBottom: 6},      
                tabBarIcon: ({color, focused})=> 
             <Icon type={item.type} name={focused ? item.activeIcon : item.inactiveIcon} color={color} />,
-            tabBarButton: (props)=> <TabButton {...props} item={item}/>
-            }}
+            tabBarButton: (props)=> <TabButton {...props} item={item}/>,
+            headerShown: route.name === 'FoodDetail',
+            headerTitle: "",
+            headerLeft: () =>   route.name === 'FoodDetail'  ? <Ionicons  name="arrow-back" size={26} color={Colors.grey['700']} onPress={navigation.goBack} style={{paddingLeft: Spacing.medium}}/>:null,
+            })}
             />)
          }
        </BottomTab.Navigator>

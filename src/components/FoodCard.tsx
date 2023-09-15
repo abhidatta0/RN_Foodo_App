@@ -34,7 +34,6 @@ const FoodCard = ({food}: Props)=>{
                 <Text style={styles.currency}>$</Text> 
                 <Text style={styles.amount}>{getLowestPrice()}</Text>
             </View>
-            <MaterialCommunityIcon name="cards-heart" size={24} color={Colors.grey['700']}/>
         </View>
         </View>
     </TouchableOpacity>
