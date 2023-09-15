@@ -14,6 +14,7 @@ import MyOrders from '../pages/MyOrders';
 import { BottomNavParamList } from '../types/Navigation';
 import React from 'react';
 import Spacing from '../theme/spacing';
+import OrderSuccess from '../pages/OrderSuccess';
 
 type TabType = {
    route: keyof BottomNavParamList,
@@ -26,14 +27,15 @@ type TabType = {
 const TabArr:TabType[] = [
     {route: 'AllMenu', label:"All Menu", type: Ionicons, activeIcon:'grid', inactiveIcon : 'grid-outline', component: AllMenu},
     {route: 'Shop', label: 'Shop', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: MyOrders},
-    {route: 'FoodDetail', label: '', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: FoodDetail}
+    {route: 'FoodDetail', label: '', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: FoodDetail},
+    {route: 'OrderSuccess', label: '', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: OrderSuccess},
 ]
 
 type TabButtonProps = BottomTabBarButtonProps & {item: typeof TabArr[0]};
 
 const TabButton = ({item, onPress, ...rest}:TabButtonProps)=>{
      const isFocused = rest.accessibilityState?.selected;
-     if(item.route === 'FoodDetail'){
+     if(['FoodDetail','OrderSuccess'].includes(item.route)){
        return null;
      }
     return (
@@ -60,7 +62,7 @@ const Navigation = ()=>{
          left: 16,
          borderRadius: 16,
          backgroundColor: Colors.grey['700'],
-         display: route.name === 'FoodDetail' ? 'none' : 'flex',
+         display: ['FoodDetail','OrderSuccess'].includes(route.name)? 'none' : 'flex',
        }})}
        >
          {
