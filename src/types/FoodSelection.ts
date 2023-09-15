@@ -2,7 +2,7 @@ export type FoodSelection =  {
     name:string
     image: string,
     subName?: string,
-    id:number,
+    id:string,
     ratingOutOf5: number;
     calories: number;
     description: string;

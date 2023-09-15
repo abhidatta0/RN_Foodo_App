@@ -51,7 +51,7 @@ const data:MenuType = {
                 availableToppings[1],
                 availableToppings[2],
             ],
-            id:123,
+            id:"123",
         },
         {
             name:'Mushroom Pizza',
@@ -78,7 +78,7 @@ const data:MenuType = {
                 availableToppings[0],
                 availableToppings[1],
             ],
-            id:124,
+            id:"124",
         },
         {
             name:'Mushroom(Salami) Pizza',
@@ -108,7 +108,7 @@ const data:MenuType = {
                     portion: 8
                 }
             ],
-            id:125,
+            id:"125",
         },
         {
             name:'Margherita Pizza',
@@ -131,7 +131,7 @@ const data:MenuType = {
                     portion: 6
                 },
             ],
-            id:126,
+            id:"126",
         },
         {
             name:'Mushroom Pizza',
@@ -148,7 +148,7 @@ const data:MenuType = {
                     portion: 4
                 },
             ],
-            id:127,
+            id:"127",
         },
 
     ],
@@ -178,7 +178,7 @@ const data:MenuType = {
                     price: 6,
                 }
             ],
-            id:128,
+            id:"128",
         },
         {
             name:'Aloo Tikki Burger',
@@ -194,7 +194,7 @@ const data:MenuType = {
                     
                 },
             ],
-            id:129,
+            id:"129",
         },
     ]
     }

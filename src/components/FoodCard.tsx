@@ -1,22 +1,28 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {useMemo} from 'react';
+import {View,TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../theme/colors';
 import Spacing from '../theme/spacing';
 import { FoodSelection } from '../types/FoodSelection';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import useFood from '../hooks/useFood';
+import { BottomNavParamList } from '../types/Navigation';
 
 type Props = {
     food: FoodSelection;
 }
 const FoodCard = ({food}: Props)=>{
    
-
+    const {navigate} = useNavigation<NavigationProp<BottomNavParamList>>();
+    const goToDetails = ()=>{
+        navigate('FoodDetail', {
+            itemId: food.id
+        });
+    }
     const { getLowestPrice} = useFood(food);
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={goToDetails}>
         <View style={styles.imgContainer}>
            <Image source={{uri: food.image}} style={styles.img}/>
         </View>
@@ -31,7 +37,7 @@ const FoodCard = ({food}: Props)=>{
             <MaterialCommunityIcon name="cards-heart" size={24} color={Colors.grey['700']}/>
         </View>
         </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
