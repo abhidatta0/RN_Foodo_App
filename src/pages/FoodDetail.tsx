@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet,Image, FlatList, ScrollView} from 'react-native';
 import {useState} from 'react';
+import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import AllMenuData from '../data/AllMenuData';
 import Spacing from '../theme/spacing';
 import { FontFamilies, FontSize } from '../theme/fonts';
@@ -8,10 +9,31 @@ import ReviewRating from '../components/ReviewRating';
 import useFood from '../hooks/useFood';
 import Badge from '../components/Badge';
 import AddToCartWrapperButton from '../components/AddToCartWrapperButton';
+import { BottomNavParamList } from '../types/Navigation';
+import { FoodSelection } from '../types/FoodSelection';
 
-const FoodDetail = ()=>{
-    const selectedFood  = AllMenuData["burger"].items[0];
+type Props = BottomTabScreenProps<BottomNavParamList,'FoodDetail'>;
 
+const flatten = (arr: FoodSelection[][]|FoodSelection[]):FoodSelection[]=>{
+   let output: FoodSelection[] = [];
+   for(let a of arr){
+    if(Array.isArray(a)){
+     const res = flatten(a);
+     output = output.concat(res);
+    }
+    else{
+        output.push(a);
+    }
+   }
+
+   return output;
+}
+const FoodDetail = ({route}: Props)=>{
+    const {itemId} = route.params;
+    const items = flatten(Object.keys(AllMenuData).map((type)=> AllMenuData[type].items));
+    const selectedFood  = items.find((food)=> food.id === itemId); 
+
+    if(!selectedFood)  return null;
     const { getDiameterAndPortion, getAvailableSizes, getVariationsNames, getToppings} = useFood(selectedFood);
 
     const diameterAndPortion = getDiameterAndPortion();

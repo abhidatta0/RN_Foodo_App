@@ -1,5 +1,5 @@
 export type BottomNavParamList = {
-    HomeTab: undefined;
+    AllMenu: undefined;
     FoodDetail: { itemId: string };
     Shop: undefined;
 };
