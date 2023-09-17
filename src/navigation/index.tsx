@@ -26,8 +26,8 @@ type TabType = {
 }
 const TabArr:TabType[] = [
     {route: 'AllMenu', label:"All Menu", type: Ionicons, activeIcon:'grid', inactiveIcon : 'grid-outline', component: AllMenu},
-    {route: 'Shop', label: 'Shop', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: MyOrders},
     {route: 'FoodDetail', label: '', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: FoodDetail},
+    {route: 'Shop', label: 'Shop', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: MyOrders},
     {route: 'OrderSuccess', label: '', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: OrderSuccess},
 ]
 
@@ -62,8 +62,9 @@ const Navigation = ()=>{
          left: 16,
          borderRadius: 16,
          backgroundColor: Colors.grey['700'],
-         display: ['FoodDetail','OrderSuccess'].includes(route.name)? 'none' : 'flex',
+         display: route.name === 'AllMenu' ? 'flex' : 'none',
        }})}
+       sceneContainerStyle={{backgroundColor: Colors.white['100']}}
        >
          {
             TabArr.map((item)=> <BottomTab.Screen key={item.label} name={item.route} component={item.component} 
@@ -72,9 +73,10 @@ const Navigation = ()=>{
                tabBarIcon: ({color, focused})=> 
             <Icon type={item.type} name={focused ? item.activeIcon : item.inactiveIcon} color={color} />,
             tabBarButton: (props)=> <TabButton {...props} item={item}/>,
-            headerShown: route.name === 'FoodDetail',
-            headerTitle: "",
-            headerLeft: () =>   route.name === 'FoodDetail'  ? <Ionicons  name="arrow-back" size={26} color={Colors.grey['700']} onPress={navigation.goBack} style={{paddingLeft: Spacing.medium}}/>:null,
+            headerShown: ['FoodDetail','Shop'].includes(route.name),
+            headerTitleAlign:'center',
+            headerTitle: route.name === 'Shop' ? 'My Order' : "",
+            headerLeft: () =>   ['FoodDetail','Shop'].includes(route.name) ? <Ionicons  name="arrow-back" size={26} color={Colors.grey['700']} onPress={navigation.goBack} style={{paddingLeft: Spacing.medium}}/>:null,
             })}
             />)
          }

@@ -39,3 +39,10 @@ type VariationType =  {
 export type Topping = {
     name:string,
 }
+
+export type OrderItem = {
+    food: FoodSelection,
+    type: PizzaType | VariationType,
+    toppingsToAdd?: Topping[],
+    quantity: number,
+}
