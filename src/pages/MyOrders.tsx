@@ -3,7 +3,7 @@ import {  OrderItem } from '../types/FoodSelection';
 import data from '../data/AllMenuData';
 import OrderItemCard from '../components/OrderItemCard';
 import Spacing from '../theme/spacing';
-import Colors from '../theme/colors';
+import MyOrdersFooter from '../components/MyOrdersFooter';
 
 const MyOrders = ()=>{
     const orderItems:OrderItem[] = [
@@ -26,6 +26,7 @@ const MyOrders = ()=>{
         data={orderItems}
         renderItem={({item})=> <OrderItemCard order={item}/>}
         keyExtractor={(item)=> item.food.id}
+        ListFooterComponent={MyOrdersFooter}
        />
     </View>
    )
