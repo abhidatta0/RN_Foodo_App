@@ -18,7 +18,7 @@ type Burger = {
     variations: VariationType[],
     category_type:'BURGER'  
 }
-type PizzaType = { 
+export type PizzaType = { 
     size:Size,
     price: number,
     diameterInInches:number,
@@ -31,7 +31,7 @@ export enum Size {
     large = "Large",
 }
 
-type VariationType =  {
+export type VariationType =  {
     name:string,
     price: number,   
 }

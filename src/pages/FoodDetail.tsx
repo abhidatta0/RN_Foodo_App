@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet,Image, FlatList, ScrollView} from 'react-native';
 import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import AllMenuData from '../data/AllMenuData';
 import Spacing from '../theme/spacing';
@@ -10,7 +11,8 @@ import useFood from '../hooks/useFood';
 import Badge from '../components/Badge';
 import AddToCartWrapperButton from '../components/AddToCartWrapperButton';
 import { BottomNavParamList } from '../types/Navigation';
-import { FoodSelection } from '../types/FoodSelection';
+import { FoodSelection, PizzaType, Topping, VariationType } from '../types/FoodSelection';
+import { AddOrUpdateOrderItemPayload, addOrUpdateOrderItem, selectOrderItems } from '../store/orderSlice';
 
 type Props = BottomTabScreenProps<BottomNavParamList,'FoodDetail'>;
 
@@ -29,6 +31,9 @@ const flatten = (arr: FoodSelection[][]|FoodSelection[]):FoodSelection[]=>{
    return output;
 }
 const FoodDetail = ({route}: Props)=>{
+    const dispatch = useDispatch();
+    const orderItems =  useSelector(selectOrderItems);
+    console.log({orderItems, toppings: orderItems.length > 0 ? orderItems[0].toppingsToAdd:null})
     const {itemId} = route.params;
     const items = flatten(Object.keys(AllMenuData).map((type)=> AllMenuData[type].items));
     const selectedFood  = items.find((food)=> food.id === itemId); 
@@ -42,14 +47,38 @@ const FoodDetail = ({route}: Props)=>{
 
     const availableSizes = getAvailableSizes();
 
-    const [currentSize, setCurrentSize] = useState(availableSizes ? availableSizes[0]: null);
-    const [currentVariation, setCurrentVariation] = useState(variationsNames ? variationsNames[0]: null);
-    const [currentTopping, setCurrentTopping] = useState(toppings ? toppings[0]: null);
+    const [currentSize, setCurrentSize] = useState(availableSizes ? availableSizes[0]: undefined);
+    const [currentVariation, setCurrentVariation] = useState(variationsNames ? variationsNames[0]: undefined);
+    const [currentToppings, setCurrentToppings] = useState<Topping[]>([]);
 
-    console.log({currentTopping});
+    console.log({currentToppings});
+
+    const updateCurrentToppings = (topping: Topping)=>{
+       const indexOfItemInExisting = currentToppings.findIndex(ct => ct.name === topping.name);
+       if(indexOfItemInExisting !== -1){
+        // remove
+        const newToppings = [...currentToppings];
+        newToppings.splice(indexOfItemInExisting, 1);
+        setCurrentToppings(newToppings);
+       }else{
+        // add 
+        const newToppings = [...currentToppings, topping];
+        setCurrentToppings(newToppings);
+       }
+    }
     const getPrice = ()=>{
         if(selectedFood.category_type === 'PIZZA') return selectedFood.pizzaTypes.find((pt)=> pt.size === currentSize)?.price;
         return selectedFood.variations.find((v)=> v.name === currentVariation)?.price;
+    }
+
+    const addToCart = (quantity: number)=>{
+        const order:AddOrUpdateOrderItemPayload = {
+          food: selectedFood,
+          type: selectedFood.category_type === 'PIZZA' ? selectedFood.pizzaTypes.find((type)=> type.size === currentSize) : selectedFood.variations.find((type)=> type.name === currentVariation),
+          toppings: currentToppings,
+          quantity,
+        }
+        dispatch(addOrUpdateOrderItem(order));
     }
   return (
     <View>
@@ -104,8 +133,8 @@ const FoodDetail = ({route}: Props)=>{
         <FlatList
          horizontal
          data={toppings}
-         renderItem={({item})=> <Badge text={item.name} onPress={()=> setCurrentTopping(item)} 
-         isSelected={currentTopping?.name === item.name}
+         renderItem={({item})=> <Badge text={item.name} onPress={()=> updateCurrentToppings(item)} 
+         isSelected={currentToppings.map(ct => ct.name).includes(item.name)}
          />}
          contentContainerStyle={styles.sizeBadgeContainerStyle}
         />
@@ -115,7 +144,7 @@ const FoodDetail = ({route}: Props)=>{
     </View>
     <View style={styles.emptySpace} />
    </ScrollView>
-    <AddToCartWrapperButton onAddToCart={(count)=> console.log({count})}/>
+    <AddToCartWrapperButton onAddToCart={(quantity)=>addToCart(quantity)}/>
     </View>
   )
 }
