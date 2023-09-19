@@ -3,12 +3,17 @@ import OctoIcons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import EntypoIcons from 'react-native-vector-icons/Entypo';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 import Spacing from '../theme/spacing';
 import Colors from '../theme/colors';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import { BottomNavParamList } from '../types/Navigation';
+import { selectDeliveryFee, selectSubTotal } from '../store/orderSlice';
 
 const MyOrdersFooter = ()=>{
+    const subTotal = useSelector(selectSubTotal);
+    const deliveryFee = useSelector(selectDeliveryFee);
+
     const {navigate} = useNavigation<NavigationProp<BottomNavParamList>>();
     const goToOrderSuccess  = ()=>{
         navigate('OrderSuccess')
@@ -19,16 +24,16 @@ const MyOrdersFooter = ()=>{
         <View style={styles.priceSummaryContainer}>
             <View style={styles.priceSummaryRow}>
                 <Text>SubTotal</Text>
-                <Text>$18.00</Text>
+                <Text>$ {subTotal}</Text>
             </View>
             <View style={styles.priceSummaryRow}>
                 <Text>Delivery Fee</Text>
-                <Text>$2.00</Text>
+                <Text>$ {deliveryFee}</Text>
             </View>
             <View style={styles.separator}/>
             <View style={styles.priceSummaryRow}>
                 <Text style={styles.totalText}>Total</Text>
-                <Text style={styles.totalText}>$20.00</Text>
+                <Text style={styles.totalText}>$ {subTotal+deliveryFee}</Text>
             </View>
         </View>
 

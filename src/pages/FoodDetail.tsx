@@ -11,8 +11,8 @@ import useFood from '../hooks/useFood';
 import Badge from '../components/Badge';
 import AddToCartWrapperButton from '../components/AddToCartWrapperButton';
 import { BottomNavParamList } from '../types/Navigation';
-import { FoodSelection, PizzaType, Topping, VariationType } from '../types/FoodSelection';
-import { AddOrUpdateOrderItemPayload, addOrUpdateOrderItem, selectOrderItems } from '../store/orderSlice';
+import { FoodSelection, OrderItem, Topping } from '../types/FoodSelection';
+import {  addOrUpdateOrderItem, selectOrderItems } from '../store/orderSlice';
 
 type Props = BottomTabScreenProps<BottomNavParamList,'FoodDetail'>;
 
@@ -72,13 +72,16 @@ const FoodDetail = ({route}: Props)=>{
     }
 
     const addToCart = (quantity: number)=>{
-        const order:AddOrUpdateOrderItemPayload = {
-          food: selectedFood,
-          type: selectedFood.category_type === 'PIZZA' ? selectedFood.pizzaTypes.find((type)=> type.size === currentSize) : selectedFood.variations.find((type)=> type.name === currentVariation),
-          toppings: currentToppings,
-          quantity,
-        }
-        dispatch(addOrUpdateOrderItem(order));
+        const type = selectedFood.category_type === 'PIZZA' ? selectedFood.pizzaTypes.find((type)=> type.size === currentSize) : selectedFood.variations.find((type)=> type.name === currentVariation);
+        if(type){
+            const order:OrderItem = {
+            food: selectedFood,
+            type,
+            toppingsToAdd: currentToppings.length > 0 ? currentToppings : undefined,
+            quantity,
+            }
+            dispatch(addOrUpdateOrderItem(order));
+       }
     }
   return (
     <View>

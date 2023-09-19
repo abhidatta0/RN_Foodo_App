@@ -1,16 +1,23 @@
 import {Text, View, StyleSheet, Image} from 'react-native';
 import FeatherIcons from 'react-native-vector-icons/Feather';
+import {useSelector, useDispatch} from 'react-redux';
 import { OrderItem } from '../types/FoodSelection';
 import Spacing from '../theme/spacing';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import Colors from '../theme/colors';
+import { addOrUpdateOrderItem } from '../store/orderSlice';
 
 type Props = {
     order: OrderItem,
 }
 const OrderItemCard = ({order}: Props)=>{
+    const dispatch = useDispatch()
     const toppingsNames = order.toppingsToAdd ? order.toppingsToAdd.map((topping)=> topping.name).join(', ') : null;
 
+    console.log({toppingsNames: order.toppingsToAdd});
+    const changeQuantity = (amount: 1 |-1)=>{
+        dispatch(addOrUpdateOrderItem({...order, quantity: amount}))
+    }
   return  <View style={styles.container}>
         <View style={styles.imageBox}>
           <Image style={styles.image} source={{uri: order.food.image}} />
@@ -24,9 +31,9 @@ const OrderItemCard = ({order}: Props)=>{
                     <Text style={styles.amount}>{order.type.price}</Text>
                 </View>
                 <View style={styles.quantityCounter}>
-                    <FeatherIcons name="minus" size={20} color={Colors.grey['700']} />
+                    <FeatherIcons name="minus" size={20} color={Colors.grey['700']} onPress={()=> changeQuantity(-1)}/>
                     <Text style={styles.count}>{order.quantity}</Text>
-                    <FeatherIcons name="plus" size={20} color={Colors.grey['700']} />
+                    <FeatherIcons name="plus" size={20} color={Colors.grey['700']} onPress={()=> changeQuantity(1)}/>
                 </View>
             </View>
         </View>
@@ -37,7 +44,7 @@ export default OrderItemCard;
 
 const styles = StyleSheet.create({
     container:{
-        marginLeft: 30,
+        marginLeft: 40,
         borderWidth: 1,
         alignSelf:'flex-end',
         borderColor: Colors.grey['400'],
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
         padding: Spacing.small,
         flexDirection:'row',
         alignItems:'center',
-        minHeight: 120
+        minHeight: 120,
     },
     imageBox:{
         width: 100, 
@@ -56,6 +63,7 @@ const styles = StyleSheet.create({
     },
     detailBox:{
       marginLeft: 70,
+      flex: 1,
     },
     image:{
     flex: 1

@@ -54,7 +54,7 @@ const Navigation = ()=>{
     <NavigationContainer>
       <SafeAreaView style={{flex: 1}}>
        <BottomTab.Navigator
-       screenOptions={({route})=> ({headerShown: false, tabBarStyle:{
+       screenOptions={({route})=> ({headerShown: false, unmountOnBlur: true,tabBarStyle:{
          height: 70,
          position:'absolute',
          bottom: 16,
