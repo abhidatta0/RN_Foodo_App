@@ -3,20 +3,22 @@ import OctoIcons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import EntypoIcons from 'react-native-vector-icons/Entypo';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Spacing from '../theme/spacing';
 import Colors from '../theme/colors';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import { BottomNavParamList } from '../types/Navigation';
-import { selectDeliveryFee, selectSubTotal } from '../store/orderSlice';
+import { clearOrders, selectDeliveryFee, selectSubTotal } from '../store/orderSlice';
 
 const MyOrdersFooter = ()=>{
     const subTotal = useSelector(selectSubTotal);
     const deliveryFee = useSelector(selectDeliveryFee);
 
+    const dispatch = useDispatch();
     const {navigate} = useNavigation<NavigationProp<BottomNavParamList>>();
     const goToOrderSuccess  = ()=>{
-        navigate('OrderSuccess')
+        dispatch(clearOrders());
+        navigate('OrderSuccess');
     }
     
   return (

@@ -53,12 +53,15 @@ const orderSlice = createSlice({
                 state.orderItems.push({food, quantity: 1,type,  toppingsToAdd })
             }
             return state;
-        }
+        },
+        clearOrders: (state)=>{
+            state.orderItems = [];
+        },
     }
 });
 
 export const {reducer : ordersReducer} = orderSlice;
-export const {addOrUpdateOrderItem} = orderSlice.actions;
+export const {addOrUpdateOrderItem, clearOrders} = orderSlice.actions;
 
 export const selectOrderItems = (rootState: RootState)=> rootState.orders.orderItems; 
 
