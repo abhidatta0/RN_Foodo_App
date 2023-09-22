@@ -1,5 +1,6 @@
 import {View, FlatList, StyleSheet, Text} from 'react-native';
 import {useState} from 'react';
+import {useSelector} from 'react-redux';
 import AllMenuData from '../data/AllMenuData';
 import FoodCard from '../components/FoodCard';
 import Spacing from '../theme/spacing';
@@ -7,8 +8,11 @@ import FoodTypeSelectButton from '../components/FoodTypeSelectButton';
 import SearchInput from '../components/SearchInput';
 import {FontFamilies, FontSize} from '../theme/fonts';
 import Colors from '../theme/colors';
+import { selectThemeMode } from '../store/themeSlice';
 
 const AllMenu = ()=>{
+    const themeMode = useSelector(selectThemeMode);
+    console.log({themeMode});
     const availableFoodTypes = Object.keys(AllMenuData);
 
     const [selectedType, setSelectedType] = useState(availableFoodTypes[0]);
