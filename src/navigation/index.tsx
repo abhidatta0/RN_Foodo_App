@@ -87,7 +87,10 @@ const Navigation = ()=>{
             headerShown: ['FoodDetail','Shop'].includes(route.name),
             headerTitleAlign:'center',
             headerTitle: route.name === 'Shop' ? 'My Order' : "",
-            headerLeft: () =>   ['FoodDetail','Shop'].includes(route.name) ? <Ionicons  name="arrow-back" size={26} color={Colors.grey['700']} onPress={navigation.goBack} style={{paddingLeft: Spacing.medium}}/>:null,
+            headerStyle: {
+              backgroundColor: themeMode === 'dark' ?   Colors.grey['700'] : Colors.white['100'] 
+            },
+            headerLeft: () =>   ['FoodDetail','Shop'].includes(route.name) ? <Ionicons  name="arrow-back" size={26} color={  themeMode === 'dark' ? Colors.white['100']: Colors.grey['700']  } onPress={navigation.goBack} style={{paddingLeft: Spacing.medium}}/>:null,
             })}
             />)
          }
