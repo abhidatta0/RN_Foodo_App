@@ -1,6 +1,7 @@
 import {View, FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import FeatherIcons from 'react-native-vector-icons/Feather';
 import AllMenuData from '../data/AllMenuData';
 import FoodCard from '../components/FoodCard';
 import Spacing from '../theme/spacing';
@@ -28,8 +29,8 @@ const AllMenu = ()=>{
     <View style={styles.container}>
         <Text style={[styles.headerLine1,{color: themeMode === 'dark' ? Colors.white['100']:Colors.grey['700'] }]}>Fast Food, </Text>
         <Text style={[styles.headerLine2, {color: themeMode === 'dark' ? Colors.gold['400']:Colors.grey['700'] }]}>Fast Delivery </Text>
-        <TouchableOpacity onPress={toggleColorMode}>
-          <Text style={ {color: themeMode === 'dark' ? Colors.gold['400']:Colors.grey['700'] }}>{`Toggle theme, current ${themeMode}`}</Text>
+        <TouchableOpacity style={styles.themeToggleBtn} onPress={toggleColorMode}>
+          <FeatherIcons name={themeMode === 'dark' ? 'moon' : 'sun'} size={40} style={ {color: themeMode === 'dark' ? Colors.gold['400']:Colors.grey['700']}} />
         </TouchableOpacity>
         <SearchInput value={searchText} updateSearchText={setSearchText} 
         placeholder={`Search your ${selectedType} here`}
@@ -86,5 +87,10 @@ const styles = StyleSheet.create({
     },
     foodTypeWrapper:{
         marginRight: 10,
+    },
+    themeToggleBtn:{
+        position:'absolute', 
+        right: 20,
+        top: 20
     }
 })
