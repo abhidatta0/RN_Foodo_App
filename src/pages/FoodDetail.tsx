@@ -98,7 +98,7 @@ const FoodDetail = ({route}: Props)=>{
             </View>
         <View style={styles.amountWrapper}>
                     <Text style={styles.currency}>$</Text> 
-                    <Text style={styles.amount}>{getPrice()}</Text>
+                    <Text style={styles.amount}>{getPrice()?.toFixed(2)}</Text>
         </View>
         <View style={styles.caloriesInfo}>
             <Text style={styles.caloriesHeading}>Calories</Text>

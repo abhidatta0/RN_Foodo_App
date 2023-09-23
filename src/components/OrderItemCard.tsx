@@ -28,7 +28,7 @@ const OrderItemCard = ({order}: Props)=>{
             <View style={styles.priceBox}>
                 <View style={styles.amountWrapper}>
                     <Text style={styles.currency}>$</Text> 
-                    <Text style={styles.amount}>{order.type.price}</Text>
+                    <Text style={styles.amount}>{order.type.price.toFixed(2)}</Text>
                 </View>
                 <View style={styles.quantityCounter}>
                     <FeatherIcons name="minus" size={20} color={Colors.grey['700']} onPress={()=> changeQuantity(-1)}/>

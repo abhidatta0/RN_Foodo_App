@@ -26,16 +26,16 @@ const MyOrdersFooter = ()=>{
         <View style={styles.priceSummaryContainer}>
             <View style={styles.priceSummaryRow}>
                 <Text>SubTotal</Text>
-                <Text>$ {subTotal}</Text>
+                <Text>$ {subTotal.toFixed(2)}</Text>
             </View>
             <View style={styles.priceSummaryRow}>
                 <Text>Delivery Fee</Text>
-                <Text>$ {deliveryFee}</Text>
+                <Text>$ {deliveryFee.toFixed(2)}</Text>
             </View>
             <View style={styles.separator}/>
             <View style={styles.priceSummaryRow}>
                 <Text style={styles.totalText}>Total</Text>
-                <Text style={styles.totalText}>$ {subTotal+deliveryFee}</Text>
+                <Text style={styles.totalText}>$ {(subTotal+deliveryFee).toFixed(2)}</Text>
             </View>
         </View>
 

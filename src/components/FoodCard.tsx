@@ -36,7 +36,7 @@ const FoodCard = ({food}: Props)=>{
         <View style={styles.amountAndFavWrapper}>
             <View style={styles.amountWrapper}>
                 <Text style={styles.currency}>$</Text> 
-                <Text style={[styles.amount, {color: themeMode === 'dark' ? Colors.gold['400']: Colors.grey['700']}]}>{getLowestPrice()}</Text>
+                <Text style={[styles.amount, {color: themeMode === 'dark' ? Colors.gold['400']: Colors.grey['700']}]}>{getLowestPrice().toFixed(2)}</Text>
             </View>
         </View>
         </View>
