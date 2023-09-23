@@ -36,14 +36,22 @@ const TabArr:TabType[] = [
 type TabButtonProps = BottomTabBarButtonProps & {item: typeof TabArr[0]};
 
 const TabButton = ({item, onPress, ...rest}:TabButtonProps)=>{
+   const themeMode = useSelector(selectThemeMode);
+
      const isFocused = rest.accessibilityState?.selected;
      if(['FoodDetail','OrderSuccess'].includes(item.route)){
        return null;
      }
+
+     const getIconColor = ()=>{
+        if(isFocused) return Colors.gold['400'];
+        if(themeMode === 'dark') return Colors.white['100']
+        return Colors.grey['400'];
+     }
     return (
      <TouchableOpacity style={styles.bottomTabContainer} onPress={onPress} activeOpacity={1}>
-       <Icon type={item.type} name={item.activeIcon} color={isFocused ? Colors.gold['400']: Colors.grey['400']}/>
-       <Text style={[ styles.iconLabel ,isFocused ? {color: Colors.grey['400']}: null]}>{item.label}</Text>
+       <Icon type={item.type} name={item.activeIcon} color={getIconColor()}/>
+       <Text style={[ styles.iconLabel ,isFocused ? {color: Colors.gold['400']}: {color: themeMode === 'dark' ? Colors.white['100'] : Colors.grey['400']}]}>{item.label}</Text>
      </TouchableOpacity>
     )
 }
@@ -64,7 +72,7 @@ const Navigation = ()=>{
          right: 16,
          left: 16,
          borderRadius: 16,
-         backgroundColor: Colors.grey['700'],
+         backgroundColor: Colors.blue['600'],
          display: route.name === 'AllMenu' ? 'flex' : 'none',
        }})}
        sceneContainerStyle={{backgroundColor: themeMode === 'light' ? Colors.white['100'] : Colors.grey['700']}}
