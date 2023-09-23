@@ -29,8 +29,10 @@ const FoodCard = ({food}: Props)=>{
            <Image source={{uri: food.image}} style={styles.img}/>
         </View>
         <View style={styles.content}>
-        <Text style={[styles.foodName, {color: themeMode === 'dark' ? Colors.gold['400']: Colors.grey['700']}]}>{food.name}</Text>
-        {food.subName ? <Text style={[styles.subName,{color: themeMode === 'dark' ? Colors.white['100']: Colors.grey['700']}]}>{food.subName}</Text> : null}
+        <View style={styles.foodNameWrapper}>
+            <Text style={[styles.foodName, {color: themeMode === 'dark' ? Colors.gold['400']: Colors.grey['700']}]} numberOfLines={2}>{food.name}</Text>
+            {food.subName ? <Text style={[styles.subName,{color: themeMode === 'dark' ? Colors.white['100']: Colors.grey['700']}]}>{food.subName}</Text> : null}
+        </View>
         <View style={styles.amountAndFavWrapper}>
             <View style={styles.amountWrapper}>
                 <Text style={styles.currency}>$</Text> 
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: Colors.grey['200'],
-        height: 170
+        height: 180
     },
     content:{
      marginTop: 60
@@ -83,6 +85,9 @@ const styles = StyleSheet.create({
     amountAndFavWrapper:{
        flexDirection:'row',
        justifyContent:'space-between'
+    },
+    foodNameWrapper:{
+        height: '70%',
     },
     foodName:{
         fontFamily: FontFamilies.Lato.Bold,
