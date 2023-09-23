@@ -1,6 +1,6 @@
-import {View, FlatList, StyleSheet, Text} from 'react-native';
+import {View, FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import AllMenuData from '../data/AllMenuData';
 import FoodCard from '../components/FoodCard';
 import Spacing from '../theme/spacing';
@@ -8,10 +8,12 @@ import FoodTypeSelectButton from '../components/FoodTypeSelectButton';
 import SearchInput from '../components/SearchInput';
 import {FontFamilies, FontSize} from '../theme/fonts';
 import Colors from '../theme/colors';
-import { selectThemeMode } from '../store/themeSlice';
+import { selectThemeMode, toggleMode } from '../store/themeSlice';
 
 const AllMenu = ()=>{
     const themeMode = useSelector(selectThemeMode);
+    const dispatch = useDispatch();
+
     console.log({themeMode});
     const availableFoodTypes = Object.keys(AllMenuData);
 
@@ -20,10 +22,15 @@ const AllMenu = ()=>{
 
     const filteredItems = AllMenuData[selectedType].items.filter((item)=> item.name.toLowerCase().includes(searchText.toLowerCase()) );
 
+    const toggleColorMode = ()=> dispatch(toggleMode());
+
    return (
     <View style={styles.container}>
-        <Text style={styles.headerLine1}>Fast Food, </Text>
-        <Text style={styles.headerLine2}>Fast Delivery </Text>
+        <Text style={[styles.headerLine1,{color: themeMode === 'dark' ? Colors.white['100']:Colors.grey['700'] }]}>Fast Food, </Text>
+        <Text style={[styles.headerLine2, {color: themeMode === 'dark' ? Colors.gold['400']:Colors.grey['700'] }]}>Fast Delivery </Text>
+        <TouchableOpacity onPress={toggleColorMode}>
+          <Text style={ {color: themeMode === 'dark' ? Colors.gold['400']:Colors.grey['700'] }}>{`Toggle theme, current ${themeMode}`}</Text>
+        </TouchableOpacity>
         <SearchInput value={searchText} updateSearchText={setSearchText} 
         placeholder={`Search your ${selectedType} here`}
         />
@@ -59,13 +66,11 @@ const styles = StyleSheet.create({
     headerLine1:{
      fontFamily: FontFamilies.Lato.Light,
      fontSize: FontSize[30],
-     color: Colors.grey['700'],
      marginTop: Spacing.large,
     },
     headerLine2:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize: FontSize[30],
-        color: Colors.grey['700'],
         marginBottom: Spacing.medium,
     },
     flatListContainer:{

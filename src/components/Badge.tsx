@@ -1,7 +1,9 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {useSelector} from 'react-redux';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import Colors from '../theme/colors';
 import Spacing from '../theme/spacing';
+import { selectThemeMode } from '../store/themeSlice';
 
 type Props = {
   onPress: ()=> void;
@@ -9,9 +11,11 @@ type Props = {
   isSelected: boolean;
 }
 const Badge  = ({onPress, text, isSelected}: Props)=>{
+  const themeMode = useSelector(selectThemeMode);
+
   return (
     <Pressable style={[styles.container, isSelected ? styles.selected : null]} onPress={onPress}>
-      <Text style={styles.badgeText}>{text}</Text>
+      <Text style={[styles.badgeText, {color: themeMode === 'dark' ? Colors.white['100'] : Colors.grey['700']}]}>{text}1312</Text>
     </Pressable>
   )
 }
@@ -33,7 +37,6 @@ const styles = StyleSheet.create({
   badgeText:{
     fontFamily: FontFamilies.Lato.Bold,
     fontSize: FontSize[16],
-    color: Colors.grey['700'],
     padding: Spacing.small,
   }
 })

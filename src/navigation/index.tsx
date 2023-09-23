@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
 
 import FoodDetail from '../pages/FoodDetail';
 import AllMenu from '../pages/AllMenu';
@@ -15,6 +16,7 @@ import { BottomNavParamList } from '../types/Navigation';
 import React from 'react';
 import Spacing from '../theme/spacing';
 import OrderSuccess from '../pages/OrderSuccess';
+import { selectThemeMode } from '../store/themeSlice';
 
 type TabType = {
    route: keyof BottomNavParamList,
@@ -49,6 +51,7 @@ const TabButton = ({item, onPress, ...rest}:TabButtonProps)=>{
 const BottomTab = createBottomTabNavigator<BottomNavParamList>();
 
 const Navigation = ()=>{
+   const themeMode = useSelector(selectThemeMode);
    return (
       <SafeAreaProvider>
     <NavigationContainer>
@@ -64,7 +67,7 @@ const Navigation = ()=>{
          backgroundColor: Colors.grey['700'],
          display: route.name === 'AllMenu' ? 'flex' : 'none',
        }})}
-       sceneContainerStyle={{backgroundColor: Colors.white['100']}}
+       sceneContainerStyle={{backgroundColor: themeMode === 'light' ? Colors.white['100'] : Colors.grey['700']}}
        >
          {
             TabArr.map((item)=> <BottomTab.Screen key={item.label} name={item.route} component={item.component} 

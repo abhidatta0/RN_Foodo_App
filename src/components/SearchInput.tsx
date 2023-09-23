@@ -1,18 +1,21 @@
 import { View, TextInput, StyleSheet, TextInputProps} from 'react-native';
+import {useSelector} from 'react-redux';
 import  Ionicons from 'react-native-vector-icons/Ionicons';
 import Spacing from '../theme/spacing';
 import Colors from '../theme/colors';
+import { selectThemeMode } from '../store/themeSlice';
 
 type Props = {
      updateSearchText: (value:string)=> void
 } & TextInputProps;
 
 const SearchInput = (props: Props)=>{
-   
+    const themeMode = useSelector(selectThemeMode);
+
    return (
     <View style={styles.container}>
-       <TextInput {...props} style={styles.textInput} value={props.value} onChangeText={(value)=> props.updateSearchText(value)}/>
-       <Ionicons name="search-outline" size={25}/>
+       <TextInput {...props} style={styles.textInput} value={props.value} onChangeText={(value)=> props.updateSearchText(value)} placeholderTextColor={themeMode === 'dark' ? Colors.gold['400']: Colors.grey['600']}/>
+       <Ionicons name="search-outline" size={25} color={themeMode === 'dark' ? Colors.gold['400']: Colors.grey['600']}/>
     </View>
    )
 }

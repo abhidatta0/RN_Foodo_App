@@ -1,18 +1,20 @@
 import {View,TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useSelector} from 'react-redux';
 import Colors from '../theme/colors';
 import Spacing from '../theme/spacing';
 import { FoodSelection } from '../types/FoodSelection';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import useFood from '../hooks/useFood';
 import { BottomNavParamList } from '../types/Navigation';
+import { selectThemeMode } from '../store/themeSlice';
 
 type Props = {
     food: FoodSelection;
 }
 const FoodCard = ({food}: Props)=>{
-   
+    const themeMode = useSelector(selectThemeMode);
+
     const {navigate} = useNavigation<NavigationProp<BottomNavParamList>>();
     const goToDetails = ()=>{
         navigate('FoodDetail', {
@@ -22,17 +24,17 @@ const FoodCard = ({food}: Props)=>{
     const { getLowestPrice} = useFood(food);
 
   return (
-    <TouchableOpacity style={styles.container} onPress={goToDetails}>
+    <TouchableOpacity style={[styles.container, {backgroundColor: themeMode === 'dark' ? Colors.grey['700'] : Colors.white['100']}]} onPress={goToDetails}>
         <View style={styles.imgContainer}>
            <Image source={{uri: food.image}} style={styles.img}/>
         </View>
         <View style={styles.content}>
-        <Text style={styles.foodName}>{food.name}</Text>
-        {food.subName ? <Text style={styles.subName}>{food.subName}</Text> : null}
+        <Text style={[styles.foodName, {color: themeMode === 'dark' ? Colors.gold['400']: Colors.grey['700']}]}>{food.name}</Text>
+        {food.subName ? <Text style={[styles.subName,{color: themeMode === 'dark' ? Colors.white['100']: Colors.grey['700']}]}>{food.subName}</Text> : null}
         <View style={styles.amountAndFavWrapper}>
             <View style={styles.amountWrapper}>
                 <Text style={styles.currency}>$</Text> 
-                <Text style={styles.amount}>{getLowestPrice()}</Text>
+                <Text style={[styles.amount, {color: themeMode === 'dark' ? Colors.gold['400']: Colors.grey['700']}]}>{getLowestPrice()}</Text>
             </View>
         </View>
         </View>
@@ -44,7 +46,6 @@ export default FoodCard;
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: Colors['grey']['100'],
         padding: Spacing.small,
         marginVertical: Spacing.large,
         borderRadius: 10,
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
     amount:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize: FontSize[20],
-        color: Colors.grey['700']
     },
     currency:{
         color: Colors.gold['400'],
@@ -87,12 +87,10 @@ const styles = StyleSheet.create({
     foodName:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize: FontSize[14],
-        color:Colors.grey['700'],
     },
     subName:{
         fontFamily: FontFamilies.Lato.Regular,
         fontSize: FontSize[14],
-        color: Colors.grey[600],
         marginVertical:Spacing.xs,
     },
 })
