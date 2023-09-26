@@ -4,6 +4,7 @@ import FeatherIcons from 'react-native-vector-icons/Feather';
 import FontistoIcons from 'react-native-vector-icons/Fontisto';
 import Spacing from '../theme/spacing';
 import Colors from '../theme/colors';
+import Shadows from '../theme/shadows';
 import { FontFamilies, FontSize } from '../theme/fonts';
 
 type Props = {
@@ -45,7 +46,7 @@ const styles =StyleSheet.create({
         borderWidth: 1,
         borderColor: Colors.grey['200'],
         borderRadius: 25,
-        elevation:2,
+        ...Shadows.small
     },
     counter:{
         flexDirection:'row',

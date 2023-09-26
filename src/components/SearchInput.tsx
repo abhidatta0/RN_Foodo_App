@@ -14,7 +14,7 @@ const SearchInput = (props: Props)=>{
 
    return (
     <View style={styles.container}>
-       <TextInput {...props} style={styles.textInput} value={props.value} onChangeText={(value)=> props.updateSearchText(value)} placeholderTextColor={themeMode === 'dark' ? Colors.gold['400']: Colors.grey['600']}/>
+       <TextInput {...props} style={[styles.searchInput, {color: themeMode === 'dark' ? Colors.white['100'] : Colors.grey['700']}]} value={props.value} onChangeText={(value)=> props.updateSearchText(value)} placeholderTextColor={themeMode === 'dark' ? Colors.gold['400']: Colors.grey['600']}/>
        <Ionicons name="search-outline" size={25} color={themeMode === 'dark' ? Colors.gold['400']: Colors.grey['600']}/>
     </View>
    )
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
      borderColor: Colors.grey['200'],
      marginVertical: Spacing.large,
     },
-    textInput:{
+    searchInput:{
         flex: 1
     }
 })
