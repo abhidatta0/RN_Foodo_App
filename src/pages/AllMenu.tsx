@@ -1,4 +1,4 @@
-import {View, FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, FlatList, StyleSheet, Text, TouchableOpacity,ScrollView} from 'react-native';
 import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import FeatherIcons from 'react-native-vector-icons/Feather';
@@ -26,6 +26,7 @@ const AllMenu = ()=>{
     const toggleColorMode = ()=> dispatch(toggleMode());
 
    return (
+    <ScrollView>
     <View style={styles.container}>
         <Text style={[styles.headerLine1,{color: themeMode === 'dark' ? Colors.white['100']:Colors.grey['700'] }]}>Fast Food, </Text>
         <Text style={[styles.headerLine2, {color: themeMode === 'dark' ? Colors.gold['400']:Colors.grey['700'] }]}>Fast Delivery </Text>
@@ -44,6 +45,7 @@ const AllMenu = ()=>{
         /></View>}
         />
         <FlatList
+        scrollEnabled={false}
         columnWrapperStyle={styles.columnWrapper}
         numColumns={2}
         data={filteredItems}
@@ -54,7 +56,8 @@ const AllMenu = ()=>{
         }
         contentContainerStyle={styles.flatListContainer}
         />
-    </View>
+        </View>
+    </ScrollView>
    )
 }
 
