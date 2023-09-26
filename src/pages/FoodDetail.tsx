@@ -95,7 +95,7 @@ const FoodDetail = ({route}: Props)=>{
         </View>
         <View style={styles.imgContainer}>
             <Image source={{uri: selectedFood.image}} style={styles.img}/>
-            </View>
+        </View>
         <View style={styles.amountWrapper}>
                     <Text style={styles.currency}>$</Text> 
                     <Text style={styles.amount}>{getPrice()?.toFixed(2)}</Text>
@@ -108,7 +108,7 @@ const FoodDetail = ({route}: Props)=>{
             <Text style={styles.portionHeading}>Diameter / Portion</Text>
             <Text style={styles.portion}>{diameterAndPortion.diameter}` / {diameterAndPortion.portion} Slices</Text>
         </View>: null}
-        </View>
+    </View>
     {availableSizes ? <View style={styles.sizeSelection}>
         <Text style={styles.sizeHeading}>Size</Text>
         <FlatList
@@ -184,16 +184,17 @@ const styles = StyleSheet.create({
         marginVertical:Spacing.xs,
     },
     img:{
-        width: '100%',
-        height: '100%',
-        resizeMode:'cover'
+        flex: 1,
+        resizeMode:'cover',
+        borderTopLeftRadius: 70,
+        borderBottomLeftRadius: 70,
     },
     imgContainer:{
         position:'absolute',
         top: '30%',
         right: -20,
         width:'60%',
-        height:'60%',
+        height:'80%',        
     },
     reviewWrapper:{
        flexDirection:'row'

@@ -79,10 +79,7 @@ const Navigation = ()=>{
        >
          {
             TabArr.map((item)=> <BottomTab.Screen key={item.label} name={item.route} component={item.component} 
-            options={({route, navigation})=> ({tabBarLabel: item.label, 
-               tabBarLabelStyle: {paddingBottom: 6},      
-               tabBarIcon: ({color, focused})=> 
-            <Icon type={item.type} name={focused ? item.activeIcon : item.inactiveIcon} color={color} />,
+            options={({route, navigation})=> ({
             tabBarButton: (props)=> <TabButton {...props} item={item}/>,
             headerShown: ['FoodDetail','Shop'].includes(route.name),
             headerTitleAlign:'center',

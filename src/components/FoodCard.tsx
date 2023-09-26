@@ -59,18 +59,15 @@ const styles = StyleSheet.create({
      marginTop: 60
     },
     img:{
-        width: '100%',
-        height: 90,
-        resizeMode:'contain'
+        flex: 1,
     },
     imgContainer:{
         position:'absolute',
-        top: -30,
+        top: -20,
         left: 10,
         width:'100%',
+        height:'50%',
         marginBottom: Spacing.small,
-        alignItems:'center',
-        justifyContent:'flex-start',
         borderRadius: 10,
     },
     amount:{
