@@ -6,7 +6,7 @@ export type FoodSelection =  {
     ratingOutOf5: number;
     calories: number;
     description: string;
-} & (PizzaTypes | Burger);
+} & (PizzaTypes | BurgerTypes);
 
 type PizzaTypes = {
     pizzaTypes: PizzaType[],
@@ -14,7 +14,7 @@ type PizzaTypes = {
     category_type :'PIZZA',
 }
 
-type Burger = {
+type BurgerTypes = {
     variations: VariationType[],
     category_type:'BURGER'  
 }
