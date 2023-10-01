@@ -1,13 +1,14 @@
-import { Rating } from 'react-native-ratings';
+import { Rating, SwipeRatingProps } from 'react-native-ratings';
 import {StyleSheet} from 'react-native';
 
 type Props = {
     rating: number;
-}
-const ReviewRating = ({rating}: Props)=>{
+} & SwipeRatingProps;
+const ReviewRating = (props: Props)=>{
     return (
         <Rating
-        startingValue={rating}
+        {...props}
+        startingValue={props.rating}
         style={styles.ratings}
         imageSize={20}
         readonly

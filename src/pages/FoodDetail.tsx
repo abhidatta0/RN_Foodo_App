@@ -13,6 +13,7 @@ import AddToCartWrapperButton from '../components/AddToCartWrapperButton';
 import { BottomNavParamList } from '../types/Navigation';
 import { FoodSelection, OrderItem, Topping } from '../types/FoodSelection';
 import {  addOrUpdateOrderItem, selectOrderItems } from '../store/orderSlice';
+import { selectThemeMode, toggleMode } from '../store/themeSlice';
 
 type Props = BottomTabScreenProps<BottomNavParamList,'FoodDetail'>;
 
@@ -32,6 +33,7 @@ const flatten = (arr: FoodSelection[][]|FoodSelection[]):FoodSelection[]=>{
 }
 const FoodDetail = ({route}: Props)=>{
     const dispatch = useDispatch();
+    const themeMode = useSelector(selectThemeMode);
     const orderItems =  useSelector(selectOrderItems);
     console.log({orderItems, toppings: orderItems.length > 0 ? orderItems[0].toppingsToAdd:null})
     const {itemId} = route.params;
@@ -87,26 +89,26 @@ const FoodDetail = ({route}: Props)=>{
     <View>
    <ScrollView style={styles.container}>
     <View style={styles.upperContent}>
-        <Text style={styles.foodName}>{selectedFood.name}</Text>
-        <Text style={styles.subName}>{selectedFood.subName}</Text>
+        <Text style={[styles.foodName, {color: themeMode === 'dark' ? Colors.gold['400'] : Colors.grey['700']}]}>{selectedFood.name}</Text>
+        <Text style={[styles.subName, {color: themeMode === 'dark' ? Colors.white['100'] :   Colors.grey[600]}]}>{selectedFood.subName}</Text>
         <View style={styles.reviewWrapper}>
-        <ReviewRating rating={selectedFood.ratingOutOf5}/>
-        <Text style={styles.ratingText}>({selectedFood.ratingOutOf5})</Text>
+        <ReviewRating rating={selectedFood.ratingOutOf5} tintColor={themeMode === 'dark' ? Colors.grey['700']: Colors.white['100']}/>
+        <Text style={[styles.ratingText, {color: themeMode === 'dark' ?  Colors.white['100']: Colors.grey['700']}]}>({selectedFood.ratingOutOf5})</Text>
         </View>
         <View style={styles.imgContainer}>
             <Image source={{uri: selectedFood.image}} style={styles.img}/>
         </View>
         <View style={styles.amountWrapper}>
                     <Text style={styles.currency}>$</Text> 
-                    <Text style={styles.amount}>{getPrice()?.toFixed(2)}</Text>
+                    <Text style={[styles.amount,{color: themeMode === 'dark' ?  Colors.gold['400']: Colors.grey['700']}]}>{getPrice()?.toFixed(2)}</Text>
         </View>
         <View style={styles.caloriesInfo}>
             <Text style={styles.caloriesHeading}>Calories</Text>
-            <Text style={styles.calories}>{selectedFood.calories} Cal</Text>
+            <Text style={[styles.calories,{color: themeMode === 'dark' ?  Colors.gold['400']: Colors.grey['700']}]}>{selectedFood.calories} Cal</Text>
         </View>
         {diameterAndPortion ? <View style={styles.portionInfo}>
             <Text style={styles.portionHeading}>Diameter / Portion</Text>
-            <Text style={styles.portion}>{diameterAndPortion.diameter}` / {diameterAndPortion.portion} Slices</Text>
+            <Text style={[styles.portion,{color: themeMode === 'dark' ?  Colors.gold['400']: Colors.grey['700']}]}>{diameterAndPortion.diameter}` / {diameterAndPortion.portion} Slices</Text>
         </View>: null}
     </View>
     {availableSizes ? <View style={styles.sizeSelection}>
@@ -165,7 +167,6 @@ const styles = StyleSheet.create({
     amount:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize: FontSize[30],
-        color: Colors.grey['700'],
     },
     currency:{
         color: Colors.gold['400'],
@@ -175,12 +176,10 @@ const styles = StyleSheet.create({
     foodName:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize: FontSize[30],
-        color:Colors.grey['700'],
     },
     subName:{
         fontFamily: FontFamilies.Lato.Regular,
         fontSize: FontSize['16'],
-        color: Colors.grey[600],
         marginVertical:Spacing.xs,
     },
     img:{
@@ -202,7 +201,6 @@ const styles = StyleSheet.create({
     ratingText:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize: FontSize[14],
-        color:Colors.grey['700'],
     },
     caloriesInfo:{
         marginVertical: Spacing.small
@@ -214,7 +212,6 @@ const styles = StyleSheet.create({
     },
     calories:{
         fontFamily: FontFamilies.Lato.Bold,
-        color: Colors.grey[700],
         fontSize: FontSize['18']
     },
     portionInfo:{

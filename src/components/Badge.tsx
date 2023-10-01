@@ -15,7 +15,7 @@ const Badge  = ({onPress, text, isSelected}: Props)=>{
 
   return (
     <Pressable style={[styles.container, isSelected ? styles.selected : null]} onPress={onPress}>
-      <Text style={[styles.badgeText, {color: themeMode === 'dark' ? Colors.white['100'] : Colors.grey['700']}]}>{text}</Text>
+      <Text style={styles.badgeText}>{text}</Text>
     </Pressable>
   )
 }
@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
     fontFamily: FontFamilies.Lato.Bold,
     fontSize: FontSize[16],
     padding: Spacing.small,
+    color: Colors.grey['700'],
   }
 })
