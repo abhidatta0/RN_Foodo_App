@@ -9,8 +9,10 @@ import Colors from '../theme/colors';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import { BottomNavParamList } from '../types/Navigation';
 import { clearOrders, selectDeliveryFee, selectSubTotal } from '../store/orderSlice';
+import { selectThemeMode } from '../store/themeSlice';
 
 const MyOrdersFooter = ()=>{
+    const themeMode = useSelector(selectThemeMode);
     const subTotal = useSelector(selectSubTotal);
     const deliveryFee = useSelector(selectDeliveryFee);
 
@@ -21,21 +23,25 @@ const MyOrdersFooter = ()=>{
         navigate('OrderSuccess');
     }
     
+    const rowKeyStyle = themeMode === 'dark' ? {color: Colors.white['100'] }: {color: Colors.grey['600']};
+    const rowValueStyle = themeMode === 'dark' ? {color: Colors.white['100'] }: {color: Colors.grey['600']};
+    const proceedIconColor = themeMode === 'dark' ? Colors.white['100'] :  Colors.grey['600'];
+
   return (
     <View>
         <View style={styles.priceSummaryContainer}>
             <View style={styles.priceSummaryRow}>
-                <Text>SubTotal</Text>
-                <Text>$ {subTotal.toFixed(2)}</Text>
+                <Text style={rowKeyStyle}>SubTotal</Text>
+                <Text style={rowValueStyle}>$ {subTotal.toFixed(2)}</Text>
             </View>
             <View style={styles.priceSummaryRow}>
-                <Text>Delivery Fee</Text>
-                <Text>$ {deliveryFee.toFixed(2)}</Text>
+                <Text style={rowKeyStyle}>Delivery Fee</Text>
+                <Text style={rowValueStyle}>$ {deliveryFee.toFixed(2)}</Text>
             </View>
-            <View style={styles.separator}/>
+            <View style={[styles.separator, {borderColor : themeMode === 'dark' ? Colors.white['100'] : Colors.grey['300']}]}/>
             <View style={styles.priceSummaryRow}>
-                <Text style={styles.totalText}>Total</Text>
-                <Text style={styles.totalText}>$ {(subTotal+deliveryFee).toFixed(2)}</Text>
+                <Text style={[styles.totalText, {color: themeMode === 'dark' ? Colors.gold['400']: Colors.grey['700'] }]}>Total</Text>
+                <Text style={[styles.totalText, {color: themeMode === 'dark' ? Colors.gold['400']: Colors.grey['700'] }]}>$ {(subTotal+deliveryFee).toFixed(2)}</Text>
             </View>
         </View>
 
@@ -43,27 +49,27 @@ const MyOrdersFooter = ()=>{
             {/* Delivery address info */}
             <View style={styles.infoRow}>
                 <View style={styles.infoContainer}>
-                    <Text style={styles.infoHeader}>Your Delivery Address</Text>
+                    <Text style={[styles.infoHeader, rowKeyStyle]}>Your Delivery Address</Text>
                     <View style={styles.infoTextContainer}>
-                        <OctoIcons name="location" size={20}/>
-                        <Text style={styles.infoText} numberOfLines={1} ellipsizeMode='tail'>HSR Layout Sector 2, Bangalore</Text>
+                        <OctoIcons name="location" size={20} color={themeMode === 'dark' ? Colors.gold['400'] : Colors.grey['700']}/>
+                        <Text style={[styles.infoText, {color : themeMode === 'dark' ? Colors.white['100'] : Colors.grey['700']}]} numberOfLines={1} ellipsizeMode='tail'>HSR Layout Sector 2, Bangalore</Text>
                     </View>
                 </View>
-                <EntypoIcons name="chevron-small-right"  size={30}/>
+                <EntypoIcons name="chevron-small-right"  size={30}  color={proceedIconColor}/>
             </View>
 
-            <View style={styles.separator}/>
+            <View style={[styles.separator, {borderColor : themeMode === 'dark' ? Colors.white['100'] : Colors.grey['300']}]}/>
 
             {/* Payment method info */}
             <View style={styles.infoRow}>
                 <View style={styles.infoContainer}>
-                    <Text style={styles.infoHeader}>Payment Method</Text>
+                    <Text style={[styles.infoHeader,rowKeyStyle]}>Payment Method</Text>
                     <View style={styles.infoTextContainer}>
-                        <SimpleLineIcons name="credit-card" size={20}/>
-                    <Text style={styles.infoText} numberOfLines={1} ellipsizeMode='tail'>Cash</Text>
+                        <SimpleLineIcons name="credit-card" size={20} color={themeMode === 'dark' ? Colors.gold['400'] : Colors.grey['700']}/>
+                    <Text style={[styles.infoText, {color : themeMode === 'dark' ? Colors.white['100'] : Colors.grey['700']}]} numberOfLines={1} ellipsizeMode='tail'>Cash</Text>
                     </View>
                 </View>
-                <EntypoIcons name="chevron-small-right" size={30} />
+                <EntypoIcons name="chevron-small-right" size={30} color={proceedIconColor}/>
             </View>
         </View>
 
@@ -91,13 +97,11 @@ const styles = StyleSheet.create({
     },
     separator:{
         borderWidth: 0.5,
-        borderColor: Colors.grey['300'],
         marginBottom: Spacing.small,
     },
     totalText:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize:FontSize['20'],
-        color: Colors.grey['700']
     },
     infoRow:{
         flexDirection: 'row',
@@ -109,7 +113,6 @@ const styles = StyleSheet.create({
     infoHeader:{
         fontFamily: FontFamilies.Lato.Regular,
         fontSize:FontSize['14'],
-        color: Colors.grey['600']
     },
     infoTextContainer:{
         flexDirection:'row',
@@ -120,7 +123,6 @@ const styles = StyleSheet.create({
     infoText:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize:FontSize['18'],
-        color: Colors.grey['700'],
         flex: 1,
     },
     addToCartBtn:{
@@ -133,6 +135,8 @@ const styles = StyleSheet.create({
         paddingVertical: Spacing.large,
         columnGap:Spacing.small,
         borderRadius: 30,
+        borderWidth: 1,
+        borderColor: Colors.white['100']
     },
     addToCartText:{
         fontFamily: FontFamilies.Lato.Regular,

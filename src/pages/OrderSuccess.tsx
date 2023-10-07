@@ -47,7 +47,8 @@ const styles  = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center',
       flex: 1,
-      rowGap: Spacing.medium
+      rowGap: Spacing.medium,
+      backgroundColor: Colors.white['100']
     },
     goToHomeBtn:{
       backgroundColor: Colors.grey['700'],

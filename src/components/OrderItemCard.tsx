@@ -6,11 +6,13 @@ import Spacing from '../theme/spacing';
 import { FontFamilies, FontSize } from '../theme/fonts';
 import Colors from '../theme/colors';
 import { addOrUpdateOrderItem } from '../store/orderSlice';
+import { selectThemeMode } from '../store/themeSlice';
 
 type Props = {
     order: OrderItem,
 }
 const OrderItemCard = ({order}: Props)=>{
+    const themeMode = useSelector(selectThemeMode);
     const dispatch = useDispatch()
     const toppingsNames = order.toppingsToAdd ? order.toppingsToAdd.map((topping)=> topping.name).join(', ') : null;
 
@@ -23,17 +25,17 @@ const OrderItemCard = ({order}: Props)=>{
           <Image style={styles.image} source={{uri: order.food.image}} />
         </View>
         <View style={styles.detailBox}>
-            <Text style={styles.name} numberOfLines={1} ellipsizeMode='tail'>{order.food.name} {order.food.subName}</Text>
-            {order.toppingsToAdd ? <Text style={styles.toppings}>Add: {toppingsNames}</Text>: null}
+            <Text style={[styles.name, {color: themeMode === 'dark' ? Colors.gold['400'] :  Colors.grey['700']}]} numberOfLines={1} ellipsizeMode='tail'>{order.food.name} {order.food.subName}</Text>
+            {order.toppingsToAdd ? <Text style={[styles.toppings, {color: themeMode === 'dark' ? Colors.white['100'] :  Colors.grey['600']}]}>Add: {toppingsNames}</Text>: null}
             <View style={styles.priceBox}>
                 <View style={styles.amountWrapper}>
                     <Text style={styles.currency}>$</Text> 
-                    <Text style={styles.amount}>{order.type.price.toFixed(2)}</Text>
+                    <Text style={[styles.amount,{color: themeMode === 'dark' ? Colors.gold['400'] :  Colors.grey['700']}]}>{order.type.price.toFixed(2)}</Text>
                 </View>
                 <View style={styles.quantityCounter}>
-                    <FeatherIcons name="minus" size={20} color={Colors.grey['700']} onPress={()=> changeQuantity(-1)}/>
-                    <Text style={styles.count}>{order.quantity}</Text>
-                    <FeatherIcons name="plus" size={20} color={Colors.grey['700']} onPress={()=> changeQuantity(1)}/>
+                    <FeatherIcons name="minus" size={20} color={themeMode === 'dark' ? Colors.white['100'] : Colors.grey['700']} onPress={()=> changeQuantity(-1)}/>
+                    <Text style={[styles.count, {color:  themeMode === 'dark' ? Colors.gold['400'] : Colors.grey['700']}]}>{order.quantity}</Text>
+                    <FeatherIcons name="plus" size={20}  color={themeMode === 'dark' ? Colors.white['100'] : Colors.grey['700']} onPress={()=> changeQuantity(1)}/>
                 </View>
             </View>
         </View>
@@ -71,12 +73,10 @@ const styles = StyleSheet.create({
     name:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize: FontSize[16],
-        color: Colors.grey['700']
     },
     toppings:{
         fontFamily: FontFamilies.Lato.Regular,
         fontSize: FontSize[14],
-        color: Colors.grey['600']
     },
     priceBox:{
      flexDirection:'row',
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
     amount:{
         fontFamily: FontFamilies.Lato.Bold,
         fontSize: FontSize['20'],
-        color: Colors.grey['700'],
     },
     currency:{
         color: Colors.gold['400'],
@@ -107,6 +106,5 @@ const styles = StyleSheet.create({
     count:{
         fontFamily: FontFamilies.Lato.Regular,
         fontSize: FontSize['18'],
-        color: Colors.grey['700']
     },
 })

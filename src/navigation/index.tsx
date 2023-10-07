@@ -84,6 +84,7 @@ const Navigation = ()=>{
             headerShown: ['FoodDetail','Shop'].includes(route.name),
             headerTitleAlign:'center',
             headerTitle: route.name === 'Shop' ? 'My Order' : "",
+            headerTintColor:themeMode === 'dark' ?   Colors.gold['400'] : Colors.grey['700'] ,
             headerStyle: {
               backgroundColor: themeMode === 'dark' ?   Colors.grey['700'] : Colors.white['100'] 
             },
