@@ -1,6 +1,6 @@
 import { View, TextInput, StyleSheet, TextInputProps} from 'react-native';
 import {useSelector} from 'react-redux';
-import  Ionicons from 'react-native-vector-icons/Ionicons';
+import  Ionicons from "@react-native-vector-icons/ionicons";
 import Spacing from '../theme/spacing';
 import Colors from '../theme/colors';
 import { selectThemeMode } from '../store/themeSlice';

@@ -1,7 +1,7 @@
 import {View, Text, TouchableOpacity, StyleSheet, Animated} from 'react-native';
 import {useRef, useEffect} from 'react';
-import EntypoIcons from 'react-native-vector-icons/Entypo';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import EntypoIcons from "@react-native-vector-icons/entypo";
+import MaterialCommunityIcons from "@react-native-vector-icons/material-design-icons";
 import {StackScreenProps} from '@react-navigation/stack';
 import Colors from '../theme/colors';
 import Spacing from '../theme/spacing';

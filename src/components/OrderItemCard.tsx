@@ -1,5 +1,5 @@
 import {Text, View, StyleSheet, Image} from 'react-native';
-import FeatherIcons from 'react-native-vector-icons/Feather';
+import FeatherIcons from "@react-native-vector-icons/feather";
 import {useSelector, useDispatch} from 'react-redux';
 import { OrderItem } from '../types/FoodSelection';
 import Spacing from '../theme/spacing';

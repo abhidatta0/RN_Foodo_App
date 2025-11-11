@@ -1,15 +1,14 @@
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Ionicons} from "@react-native-vector-icons/ionicons";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {MaterialDesignIcons, MaterialDesignIconsIconName} from "@react-native-vector-icons/material-design-icons";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 
 import FoodDetail from '../pages/FoodDetail';
 import AllMenu from '../pages/AllMenu';
-import Icon from '../components/Icon';
 import Colors from '../theme/colors';
 import MyOrders from '../pages/MyOrders';
 import { BottomNavParamList } from '../types/Navigation';
@@ -21,16 +20,15 @@ import { selectThemeMode } from '../store/themeSlice';
 type TabType = {
    route: keyof BottomNavParamList,
    label: string,
-   type: typeof Ionicons,
-   activeIcon: string,
-   inactiveIcon: string,
+   type:  typeof  MaterialDesignIcons,
+   activeIcon: React.ComponentProps<typeof MaterialDesignIcons>["name"],
    component?:any,
 }
 const TabArr:TabType[] = [
-    {route: 'AllMenu', label:"All Menu", type: Ionicons, activeIcon:'grid', inactiveIcon : 'grid-outline', component: AllMenu},
-    {route: 'FoodDetail', label: '', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: FoodDetail},
-    {route: 'Shop', label: 'Shop', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: MyOrders},
-    {route: 'OrderSuccess', label: '', type: MaterialCommunityIcons, activeIcon:'shopping', inactiveIcon : 'cart-outline', component: OrderSuccess},
+    {route: 'AllMenu', label:"All Menu", type: MaterialDesignIcons, activeIcon:'silverware', component: AllMenu},
+    {route: 'FoodDetail', label: '', type: MaterialDesignIcons, activeIcon:'shopping', component: FoodDetail},
+    {route: 'Shop', label: 'Shop', type: MaterialDesignIcons, activeIcon:'shopping', component: MyOrders},
+    {route: 'OrderSuccess', label: '', type: MaterialDesignIcons, activeIcon:'shopping', component: OrderSuccess},
 ]
 
 type TabButtonProps = BottomTabBarButtonProps & {item: typeof TabArr[0]};
@@ -50,7 +48,7 @@ const TabButton = ({item, onPress, ...rest}:TabButtonProps)=>{
      }
     return (
      <TouchableOpacity style={styles.bottomTabContainer} onPress={onPress} activeOpacity={1}>
-       <Icon type={item.type} name={item.activeIcon} color={getIconColor()}/>
+      <item.type name={item.activeIcon} size={24} style={{color:getIconColor()}} />
        <Text style={[ styles.iconLabel ,isFocused ? {color: Colors.gold['400']}: {color: themeMode === 'dark' ? Colors.white['100'] : Colors.grey['400']}]}>{item.label}</Text>
      </TouchableOpacity>
     )
