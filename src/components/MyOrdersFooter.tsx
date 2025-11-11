@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import OctoIcons from 'react-native-vector-icons/Octicons';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import EntypoIcons from 'react-native-vector-icons/Entypo';
+import OctoIcons from "@react-native-vector-icons/octicons";
+import FeatherIcons from "@react-native-vector-icons/feather";
+import EntypoIcons from "@react-native-vector-icons/entypo";
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import Spacing from '../theme/spacing';
@@ -65,7 +65,7 @@ const MyOrdersFooter = ()=>{
                 <View style={styles.infoContainer}>
                     <Text style={[styles.infoHeader,rowKeyStyle]}>Payment Method</Text>
                     <View style={styles.infoTextContainer}>
-                        <SimpleLineIcons name="credit-card" size={20} color={themeMode === 'dark' ? Colors.gold['400'] : Colors.grey['700']}/>
+                        <FeatherIcons name="credit-card" size={20} color={themeMode === 'dark' ? Colors.gold['400'] : Colors.grey['700']}/>
                     <Text style={[styles.infoText, {color : themeMode === 'dark' ? Colors.white['100'] : Colors.grey['700']}]} numberOfLines={1} ellipsizeMode='tail'>Cash</Text>
                     </View>
                 </View>

@@ -1,7 +1,7 @@
 import {View, FlatList, StyleSheet, Text, TouchableOpacity,ScrollView} from 'react-native';
 import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import FeatherIcons from 'react-native-vector-icons/Feather';
+import FeatherIcons from "@react-native-vector-icons/feather";
 import AllMenuData from '../data/AllMenuData';
 import FoodCard from '../components/FoodCard';
 import Spacing from '../theme/spacing';
@@ -15,7 +15,6 @@ const AllMenu = ()=>{
     const themeMode = useSelector(selectThemeMode);
     const dispatch = useDispatch();
 
-    console.log({themeMode});
     const availableFoodTypes = Object.keys(AllMenuData);
 
     const [selectedType, setSelectedType] = useState(availableFoodTypes[0]);

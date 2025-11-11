@@ -1,5 +1,5 @@
 import {Text, View, StyleSheet, Image} from 'react-native';
-import FeatherIcons from 'react-native-vector-icons/Feather';
+import FeatherIcons from "@react-native-vector-icons/feather";
 import {useSelector, useDispatch} from 'react-redux';
 import { OrderItem } from '../types/FoodSelection';
 import Spacing from '../theme/spacing';
@@ -16,7 +16,6 @@ const OrderItemCard = ({order}: Props)=>{
     const dispatch = useDispatch()
     const toppingsNames = order.toppingsToAdd ? order.toppingsToAdd.map((topping)=> topping.name).join(', ') : null;
 
-    console.log({toppingsNames: order.toppingsToAdd});
     const changeQuantity = (amount: 1 |-1)=>{
         dispatch(addOrUpdateOrderItem({...order, quantity: amount}))
     }

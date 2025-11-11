@@ -7,17 +7,9 @@ const reducer = combineReducers({
    theme: themeReducer,
 })
 
-const middlewares = [
-    /* other middlewares */
-];
   
-if (__DEV__) {
-    const createDebugger = require('redux-flipper').default;
-    middlewares.push(createDebugger());
-}
 const store = configureStore({
     reducer,
-    middleware: middlewares,
 })
 
 export default store;

@@ -12,7 +12,6 @@ const initialState: InitialStateType = {
 }
 
 const checkIfSameToppings = (arr1?: Topping[], arr2?: Topping[])=>{
-    console.log({arr1xzx: arr1, arr2});
   if(arr1){
    if(arr2){
     if(arr1.length !== arr2.length) return false;
@@ -37,7 +36,6 @@ const orderSlice = createSlice({
         addOrUpdateOrderItem: (state, action:PayloadAction<OrderItem> )=>{
             const { food, type, toppingsToAdd,quantity }  = action.payload;
             const indexOfExistingItem = state.orderItems.findIndex((oi) => oi.food.id === food.id && oi.type.price === type.price && checkIfSameToppings(oi.toppingsToAdd, toppingsToAdd));
-            console.log({indexOfExistingItem});
             if(indexOfExistingItem !== -1){
                 // update
                 const existingItem = state.orderItems[indexOfExistingItem];
@@ -50,7 +48,7 @@ const orderSlice = createSlice({
             }
             else{
                 // add
-                state.orderItems.push({food, quantity: 1,type,  toppingsToAdd })
+                state.orderItems.push({food, quantity,type,  toppingsToAdd })
             }
             return state;
         },

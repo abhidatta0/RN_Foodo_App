@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
-import FeatherIcons from 'react-native-vector-icons/Feather';
-import FontistoIcons from 'react-native-vector-icons/Fontisto';
+import FeatherIcons from "@react-native-vector-icons/feather";
+import FontistoIcons from "@react-native-vector-icons/fontisto";
 import Spacing from '../theme/spacing';
 import Colors from '../theme/colors';
 import Shadows from '../theme/shadows';

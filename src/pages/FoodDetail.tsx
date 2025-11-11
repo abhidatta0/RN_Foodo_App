@@ -35,7 +35,6 @@ const FoodDetail = ({route}: Props)=>{
     const dispatch = useDispatch();
     const themeMode = useSelector(selectThemeMode);
     const orderItems =  useSelector(selectOrderItems);
-    console.log({orderItems, toppings: orderItems.length > 0 ? orderItems[0].toppingsToAdd:null})
     const {itemId} = route.params;
     const items = flatten(Object.keys(AllMenuData).map((type)=> AllMenuData[type].items));
     const selectedFood  = items.find((food)=> food.id === itemId); 
@@ -52,8 +51,6 @@ const FoodDetail = ({route}: Props)=>{
     const [currentSize, setCurrentSize] = useState(availableSizes ? availableSizes[0]: undefined);
     const [currentVariation, setCurrentVariation] = useState(variationsNames ? variationsNames[0]: undefined);
     const [currentToppings, setCurrentToppings] = useState<Topping[]>([]);
-
-    console.log({currentToppings});
 
     const updateCurrentToppings = (topping: Topping)=>{
        const indexOfItemInExisting = currentToppings.findIndex(ct => ct.name === topping.name);
