@@ -16,7 +16,6 @@ const OrderItemCard = ({order}: Props)=>{
     const dispatch = useDispatch()
     const toppingsNames = order.toppingsToAdd ? order.toppingsToAdd.map((topping)=> topping.name).join(', ') : null;
 
-    console.log({toppingsNames: order.toppingsToAdd});
     const changeQuantity = (amount: 1 |-1)=>{
         dispatch(addOrUpdateOrderItem({...order, quantity: amount}))
     }

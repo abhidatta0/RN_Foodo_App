@@ -1,4 +1,4 @@
-package com.Foodo
+package com.foodo
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

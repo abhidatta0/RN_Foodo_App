@@ -15,7 +15,6 @@ const AllMenu = ()=>{
     const themeMode = useSelector(selectThemeMode);
     const dispatch = useDispatch();
 
-    console.log({themeMode});
     const availableFoodTypes = Object.keys(AllMenuData);
 
     const [selectedType, setSelectedType] = useState(availableFoodTypes[0]);
