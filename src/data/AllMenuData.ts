@@ -1,3 +1,4 @@
+import { MaterialDesignIconsIconName } from "@react-native-vector-icons/material-design-icons";
 import { FoodSelection, Size, Topping } from "../types/FoodSelection";
 
 const availableToppings:Topping[] = [
@@ -13,7 +14,7 @@ const availableToppings:Topping[] = [
   ]
 
   
-type MenuType = Record<string,{ items: FoodSelection[], iconName:string}>
+type MenuType = Record<string,{ items: FoodSelection[], iconName:MaterialDesignIconsIconName}>
 const data:MenuType = {
     pizza:{
         iconName:'pizza',

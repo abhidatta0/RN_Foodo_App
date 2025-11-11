@@ -53,13 +53,14 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: Colors.grey['200'],
-        height: 180
+        height: 180,
     },
     content:{
      marginTop: 60
     },
     img:{
         flex: 1,
+        borderRadius:10
     },
     imgContainer:{
         position:'absolute',
