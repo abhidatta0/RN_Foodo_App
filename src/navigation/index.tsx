@@ -81,7 +81,7 @@ const Navigation = ()=>{
             tabBarButton: (props)=> <TabButton {...props} item={item}/>,
             headerShown: ['FoodDetail','Shop'].includes(route.name),
             headerTitleAlign:'center',
-            headerTitle: route.name === 'Shop' ? 'My Order' : "",
+            headerTitle: route.name === 'Shop' ? 'Cart' : "",
             headerTintColor:themeMode === 'dark' ?   Colors.gold['400'] : Colors.grey['700'] ,
             headerStyle: {
               backgroundColor: themeMode === 'dark' ?   Colors.grey['700'] : Colors.white['100'] 
