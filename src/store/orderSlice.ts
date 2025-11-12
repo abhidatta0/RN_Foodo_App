@@ -1,14 +1,17 @@
-import { createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createSelector} from '@reduxjs/toolkit';
 import { OrderItem, Topping } from '../types/FoodSelection';
 import { RootState } from './store';
 
 type InitialStateType = {
     orderItems: OrderItem[],
     deliveryFee: number,
+    freeDeliveryFrom: number;
 }
 const initialState: InitialStateType = {
     orderItems: [],
   deliveryFee: 2,
+  freeDeliveryFrom: 30,
+
 }
 
 const checkIfSameToppings = (arr1?: Topping[], arr2?: Topping[])=>{
@@ -61,7 +64,9 @@ const orderSlice = createSlice({
 export const {reducer : ordersReducer} = orderSlice;
 export const {addOrUpdateOrderItem, clearOrders} = orderSlice.actions;
 
+export const orderInfo = (rootState: RootState)=> rootState.orders;
 export const selectOrderItems = (rootState: RootState)=> rootState.orders.orderItems; 
 
-export const selectSubTotal = (rootState: RootState)=> rootState.orders.orderItems.reduce((acc, curr)=> acc = acc + curr.quantity * curr.type.price,0);
-export const selectDeliveryFee = (rootState: RootState)=> rootState.orders.deliveryFee;
+export const selectSubTotal = (rootState: RootState)=> rootState.orders.orderItems.reduce((acc, curr)=> acc + curr.quantity * curr.type.price,0);
+export const selectDeliveryFee = createSelector(orderInfo, selectSubTotal, (info, subTotal) => 
+    subTotal > info.freeDeliveryFrom ? 0 : info.deliveryFee);
